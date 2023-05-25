@@ -11,6 +11,9 @@
      <!-- Fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../static/style.css"/>
+  <link rel="stylesheet" href="../static/style.css"/>
+  <script defer src="../static/items.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
   </head>
 
@@ -119,62 +122,32 @@
       </div>
     </nav>
 
+    <!--Item details and description -->
     <div class="container text-center">
-      <div class="row align-items-start">
-        <!--Sidebar-->
-        <div class="col-4">
-          <ul class="list-group text-start">
-            <li class="list-group-item">
-              <ul class="list-unstyled">
-                <p>Department</p>
-                <li class="">-</li>
-                <li class="">-</li>
-                <li class="">-</li>
-              </ul>
-              <ul class="list-unstyled">
-                <p>Review</p>
-                <!--<li class=""><i class="fa-solid fa-star" style="color: #f7ef18;"></i>1 Star 😇 </li>-->
-                <li class="">⭐️⭐️⭐️⭐️⭐️  5 Star 😇 </li>
-                <li class="">⭐️⭐️⭐️⭐️   4  Star 😇 </li>
-                <li class="">⭐️⭐️⭐️⭐️⭐️5 Star 😇 </li>
-                <li class="">⭐️⭐️⭐️⭐️⭐️5 Star 😇 </li>
-                <li class="">⭐️⭐️⭐️⭐️⭐️5 Star 😇 </li>
-                <li class="">-</li>
-                <li class="">-</li>
-              </ul>
-            </li>
-          </ul>
+      <div class="row">
+        <div class="col">
+          <h3>Apple Iphone 14, 256GB, Midnight</h3>
+          <img src="https://m.media-amazon.com/images/I/51Yz9FaNIGL._AC_SX679_.jpg" alt="...">
         </div>
-        
-        <!--Items-->
-        <div class="col-8">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://m.media-amazon.com/images/I/71wXQyxCENL._AC_UY436_FMwebp_QL65_.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
+                
+        <div class="col">
+          <div class = "card" style="width: 18rem;">
+            <p>Item Details</p>
+            <ul class = "list-unstyled">
+              <li class="">-</li>
+              <li class="">-</li>
+              <li class="">-</li>
+            </ul>            
           </div>
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class = "col">
+          <div class = "card" style="width: 18rem;">
+           <p>Payment</p>
+           <ul class = "list-unstyled">
+              <li class="">-</li>
+              <li class="">-</li>
+              <li class="">-</li>
+           </ul>
           </div>
 
 
@@ -182,6 +155,199 @@
 
 
 
+      </div>
+    </div>
+
+    <!-- Row-3-->
+    <div class="row mx-1 mb-3">
+      <div class="card">
+        <h5 class="card-title p-3 text-start">Products related to this item</h5>
+        <div id="carousel-related-items" class="carousel">
+          <div class="carousel-inner-related-items">
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+            <div class="carousel-item-related-items">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <p>Product name</p>
+            </div>
+
+          </div>
+          <button class="carousel-control-related-items-prev" type="button" data-bs-target="#carousel-related-items" data-bs-slide="prev">
+            <span class="carousel-control-related-items-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-related-items-next" type="button" data-bs-target="#carousel-related-items" data-bs-slide="next">
+            <span class="carousel-control-related-items-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row-4-->
+    <div class="row mx-1 mb-3">
+      <div class="card">
+        <h5 class="card-title p-3 text-start">Customers also search</h5>
+        <div id="carousel-customers-search " class="carousel">
+          <div class="carousel-inner-customers-search ">
+
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+            <div class="carousel-item-customers-search ">
+              <div class="image-wrapper">
+                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <!--<h5 class="card-title">Card title</h5>-->
+                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
+                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
+                <p class="card-text">NZ$100</p>
+                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
+                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-control-customers-search-prev" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="prev">
+            <span class="carousel-control-customers-search-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-customers-search-next" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="next">
+            <span class="carousel-control-customers-search-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
     </div>
 
