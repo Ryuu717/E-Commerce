@@ -78,14 +78,13 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            {% for category in category_list%}
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Electronics</a>
+              <a class="nav-link" aria-current="page" href="#">{{category[1]}}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Beauty</a>
-            </li>
+            {% endfor %}
 
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Fashion</a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -95,7 +94,7 @@
                 </li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
           <form class="d-flex mt-3" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -105,10 +104,9 @@
       </div>
       <a class="text-decoration-none text-white px-2" href="#">All</a>
       <div class="d-flex flex-row">
-        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-1</a></div>
-        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-2</a></div>
-        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-3</a></div>
-        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-4</a></div>
+        {% for category in category_list%}
+        <div class="p-2"><a class="text-decoration-none text-white" href="">{{category[1]}}</a></div>
+        {% endfor %}
       </div>
     </div>
   </nav>
