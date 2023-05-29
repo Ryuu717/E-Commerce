@@ -1,48 +1,68 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-  <title>Registration</title>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Fontawesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../static/style.css"/>
-</head>
+<!-- Header -->
+{% include "header.html" %}
 
-<body class="py-0 px-0 m-0 border-0 bd-example">
+<!-- Body -->
+<body class="py-0 m-0 border-0 bd-example">
   
   <!--Registration Form-->
   <div class="d-flex justify-content-center my-5">
-    <form class="card p-4">
+    <form class="card p-4" action="/add_account", method="post">
       <h2 class="text-start">Create account</h2>
       <div class="form-row">
         <div class="form-group col-md-6 mb-2">
-          <label for="inputCity">Your Name</label>
-          <input type="text" class="form-control" id=""  placeholder="First and last name">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="ex) John">
         </div>
 
         <div class="form-group col-md-6 mb-2">
-          <label for="inputEmail4">Mobile Number or Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Mobile Number or Email">
+          <label for="inputlastName">Last Name</label>
+          <input type="text" class="form-control" id="inputlastName" name="inputLastName" placeholder="ex) Wick">
+        </div>
+
+        <div class="form-group col-md-6 mb-2">
+          <label for="inputMobile">Phone Number</label>
+          <input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="ex) 012-3456-7890">
+        </div>
+
+        <div class="form-group col-md-6 mb-2">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="ex) email@gmail.com">
         </div>
 
         <div class="form-group col-md-8 mb-2">
-          <label for="inputPassword4">Password</label>
-          <input type="password" class="form-control" id="inputPassword4" placeholder="At least 6 characters">
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="At least 6 characters">
           <p><i class="fa-solid fa-circle-info"></i> Password must be at least 6 characters</p>
         </div>
         <div class="form-group col-md-6 mb-5">
-          <label for="inputPassword4">Re-Enter Password</label>
-          <input type="password" class="form-control" id="inputPassword4" placeholder="Re-Enter Password">
+          <label for="inputConfirmPassword">Re-Enter Password</label>
+          <input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" placeholder="Re-Enter Password">
         </div>
       </div>
-      <button type="submit" class="btn btn-success col-md-12">Continue</button>
+
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Account successfully added
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button> -->
+              <input type="submit" name="Go Back to home" class="btn btn-success col-md-12" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <hr class="my-5">
-      <p>Already have an account?<span class="px-2"><a href="">Sign in</a></span></p>
+      <p>Already have an account?<span class="px-2"><a href="/signin">Sign in</a></span></p>
     </form>
   </div>
 

@@ -1,0 +1,114 @@
+  <!--Navbar-1-->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top py-0 pt-2 pb-2 my-0" data-bs-theme="dark" style="background-color: black !important">
+    <div class="container-fluid mx-5">
+    <!--Logo-->
+    <div class="collapse navbar-collapse justify-content-start">
+      <a href="/">
+        <img src="../static/images/logo.png" class="d-block " alt="..." style="width: 70px">
+      </a>
+    </div>
+    <!--Search-->
+    <div class="collapse navbar-collapse justify-content-between">
+      <div class="collapse navbar-collapse justify-content-end">
+        <form class="d-flex" role="search">
+          <button class="btn btn-success" type="submit">All</button>
+          <input class="form-control input-lg" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+    </div>
+    <!--Others Nav Items-->
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <!--Lang-->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">🇺🇸 EN</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">🇳🇿 New Zealand</a></li>
+            <li><a class="dropdown-item" href="#">🇺🇸 US</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Others</a></li>
+          </ul>
+        </li>
+        <!--Account-->
+        <li class="nav-item dropdown">
+          {% if account_list %}
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{account_list[0][1]}}</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/show_account/{{account_list[0][0]}}">My Page</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Oders</a></li>
+              <li><a class="dropdown-item" href="#">-</a></li>
+            </ul>
+          {% else %}
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/signin">Sign in</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">-</a></li>
+            </ul>
+          {% endif %}
+        </li>
+        <!--Oders-->
+        <li class="nav-item">
+          <a class="nav-link" href="#">Orders</a>
+        </li>
+        <!--Cart-->
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fa-solid fa-cart-shopping position-relative" style="color: #ffffff;">
+              <span class="position-absolute top-0 start-10 translate-middle badge rounded-pill bg-danger">3</span>
+            </i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--Navbar-2-->
+  <nav class="navbar navbar-dark bg-dark fixed-top py-1 my-0">
+    <div class="container-fluid justify-content-start mx-2">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Categories</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Electronics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Beauty</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Fashion</a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+      <a class="text-decoration-none text-white px-2" href="#">All</a>
+      <div class="d-flex flex-row">
+        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-1</a></div>
+        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-2</a></div>
+        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-3</a></div>
+        <div class="p-2"><a class="text-decoration-none text-white" href="">Category-4</a></div>
+      </div>
+    </div>
+  </nav>

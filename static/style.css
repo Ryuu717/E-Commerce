@@ -9,6 +9,17 @@
     width: 600px !important;
 }
 
+.img-sm{
+    height: 8rem !important; 
+    object-fit: contain !important; 
+}
+
+.img-lg{
+    height: 18.5rem !important; 
+    object-fit: contain !important; 
+}
+
+
 .a-divider-break:after {
     content: "";
     width: 100%;
