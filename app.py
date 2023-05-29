@@ -8,7 +8,7 @@ app = Flask(__name__)
 def main():
    item_list = []
    
-   with sql.connect("EC/EC.db") as con:
+   with sql.connect("EC.db") as con:
       cur = con.cursor()
       cur.execute("select * from items")
       item_list= cur.fetchall(); 
@@ -46,7 +46,7 @@ def add_account():
          account_list.extend([FirstName,LastName,Phone,Email])
          
          if FirstName!="" and LastName!="" and Phone!="" and Email!="" and Password!="" and ConfirmPassword!="":
-               with sql.connect("EC/EC.db") as con:
+               with sql.connect("EC.db") as con:
                   cur = con.cursor()
                   cur.execute("INSERT INTO users (FirstName, LastName, Phone, Email) VALUES (?,?,?,?)",(FirstName, LastName, Phone, Email))
                   con.commit()
@@ -76,7 +76,7 @@ def add_account():
 
 @app.route('/show_account/<string:UesrID>', methods = ['GET']) 
 def show_account(UesrID):
-    con = sql.connect("EC/EC.db")
+    con = sql.connect("EC.db")
     con.row_factory = sql.Row 
     cur = con.cursor() 
    #  cur.execute("select * from users")
