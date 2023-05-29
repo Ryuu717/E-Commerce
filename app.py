@@ -7,12 +7,17 @@ app = Flask(__name__)
 @app.route("/")
 def main():
    item_list = []
+   category_list = []
    
    with sql.connect("EC.db") as con:
       cur = con.cursor()
       cur.execute("select * from items")
       item_list= cur.fetchall(); 
-      return render_template("main.html", item_list = item_list)
+      
+      cur.execute("select * from categories")
+      category_list= cur.fetchall(); 
+      
+      return render_template("main.html", item_list = item_list, category_list = category_list)
 
 @app.route("/signin")
 def signin():
