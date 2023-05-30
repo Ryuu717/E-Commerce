@@ -31,6 +31,10 @@ def item():
 def items():
    return render_template("items.html")
 
+@app.route("/payment")
+def payment():
+   return render_template("payment.html")
+
 @app.route("/register")
 def register():
    return render_template("register.html")
