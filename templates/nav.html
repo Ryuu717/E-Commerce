@@ -30,12 +30,36 @@
             <li><a class="dropdown-item" href="#">Others</a></li>
           </ul>
         </li>
+        
         <!--Account-->
         <li class="nav-item dropdown">
-          {% if account_list %}
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{account_list[0][1]}}</a>
+          {% if current_user.UserID %}
+
+            <!-- Modal -->
+            <!-- <div class="modal hide" tabindex="-1" role="dialog" id="myModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content bg-light">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Sign in successfully</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true"><a class="text-decoration-none text-white" href="/">&times;</a></span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="">Welcome to {{current_user.FirstName}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="text-decoration-none text-white" href="/">Close</a></button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{current_user.FirstName}}</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/show_account/{{account_list[0][0]}}">My Page</a></li>
+              <li><a class="dropdown-item" href="/show_account/{{current_user.UserID}}">My Page</a></li>
+              <li><a class="dropdown-item" href="/logout">Log out</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Oders</a></li>
               <li><a class="dropdown-item" href="#">-</a></li>
@@ -78,9 +102,9 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            {% for category in category_list%}
+            {% for item in all_items[1]%}
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">{{category[1]}}</a>
+              <a class="nav-link" aria-current="page" href="#">{{item[1]}}</a>
             </li>
             {% endfor %}
 
@@ -104,8 +128,8 @@
       </div>
       <a class="text-decoration-none text-white px-2" href="#">All</a>
       <div class="d-flex flex-row">
-        {% for category in category_list%}
-        <div class="p-2"><a class="text-decoration-none text-white" href="">{{category[1]}}</a></div>
+        {% for item in all_items[1]%}
+        <div class="p-2"><a class="text-decoration-none text-white" href="">{{item[1]}}</a></div>
         {% endfor %}
       </div>
     </div>
