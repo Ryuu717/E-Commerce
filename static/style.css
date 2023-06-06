@@ -158,7 +158,7 @@ Black: %23000 */
 .carousel-control-wish-list-prev,
 .carousel-control-related-items-prev,
 .carousel-control-customers-search-prev {
-    left: -6%;
+    left: -7%;
 }
 .carousel-control-top-categories-next, 
 .carousel-control-for-you-next,
@@ -166,5 +166,14 @@ Black: %23000 */
 .carousel-control-wish-list-next,
 .carousel-control-related-items-next,
 .carousel-control-customers-search-next {
-    right: -6%;
+    right: -7%;
 }
+
+
+
+.truncate {
+    width: 250px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

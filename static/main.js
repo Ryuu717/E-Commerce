@@ -47,3 +47,12 @@ $('.carousel-control-for-you-prev').on('click', function(){
         $('.carousel-inner-for-you').animate({scrollLeft: scrollPosition},600); 
     } 
 }); 
+
+
+////////////////////////////////////////////////////////////////////////////////////
+// Modal
+////////////////////////////////////////////////////////////////////////////////////
+
+$(window).on('load', function() {
+    $('#myModal').modal('show')
+});
