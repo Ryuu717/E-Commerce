@@ -34,102 +34,110 @@
     <!-- Row-1-->
     <div class="row mb-3">
       <!-- Row-1 Col-1-->
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <h5 class="card-title p-3">Recently viewed</h5>
-          <div class="row">
-            <div class="col">
-              <a href="/items">
-                <img src="{{all_items[2][0][9]}}" class="card-img-top img-sm" alt="...">
-              </a>
-              <p>{{all_items[2][0][5]}}</p>
-            </div>
-            <div class="col img-sm">
-              <img src="{{all_items[2][1][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[2][1][5]}}</p>
-            </div>
+      {% if current_user_id == 'None' %}
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <h5 class="card-title p-3">Electronics</h5>
+            <a href="/show_item/{{recently_viewed_list[0][2]}}">
+              <img src="{{recently_viewed_list[0][7]}}" class="card-img-top img-lg" alt="...">
+            </a>
+            <p class="text-white">-</p>
+            <p><a href="/show_item/{{recently_viewed_list[0][2]}}" class="text-decoration-none">see more</a></p>
           </div>
-          <div class="row">
-            <div class="col">
-              <img src="{{all_items[2][2][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[2][2][5]}}</p>
-            </div>
-            <div class="col">
-              <img src="{{all_items[2][3][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[2][3][5]}}</p>
-            </div>
-          </div>
-          <p><a>see more</a></p>
         </div>
-      </div>
+      {% else %}
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <h5 class="card-title p-3">Recently viewed</h5>
+            <div class="row">
+              <div class="col">
+                <a href="/show_items/{{recently_viewed_list[0][4]}}">
+                  <img src="{{recently_viewed_list[0][11]}}" class="card-img-top img-sm" alt="...">
+                </a>
+                <p>{{recently_viewed_list[0][5]}}</p>
+              </div>
+              <div class="col img-sm">
+                <a href="/show_items/{{recently_viewed_list[1][4]}}">
+                  <img src="{{recently_viewed_list[1][11]}}" class="card-img-top img-sm" alt="...">
+                </a>
+                <p>{{recently_viewed_list[1][5]}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <a href="/show_items/{{recently_viewed_list[2][4]}}">
+                  <img src="{{recently_viewed_list[2][11]}}" class="card-img-top img-sm" alt="...">
+                </a>
+                <p>{{recently_viewed_list[2][5]}}</p>
+              </div>
+              <div class="col">
+                <a href="/show_items/{{recently_viewed_list[3][4]}}">
+                  <img src="{{recently_viewed_list[3][11]}}" class="card-img-top img-sm" alt="...">
+                </a>
+                <p>{{recently_viewed_list[3][5]}}</p>
+              </div>
+            </div>
+            <p><a>see more</a></p>
+          </div>
+        </div>
+      {% endif %}
 
       <!-- Row-1 Col-2-->
       <div class="col">
         <div class="card" style="width: 18rem">
           <h5 class="card-title p-3">Recommended</h5>
-          <img src="{{all_items[3][0][7]}}" class="card-img-top img-lg" alt="...">
-          <p>{{all_items[3][0][1]}}</p>
-          <p><a>see more</a></p>
+          <a href="/show_items/{{recommended_list[0][0]}}">
+            <img src="{{recommended_list[0][7]}}" class="card-img-top img-lg" alt="...">
+          </a>
+          <p>{{recommended_list[0][1]}}</p>
+          <p><a href="/show_item/{{recommended_list[0][2]}}" class="text-decoration-none">see more</a></p>
         </div>
       </div>
 
 
       <!-- Row-1 Col-3-->
-      {% if current_user %}
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <h5 class="card-title p-3">Buy again</h5>
-          <div class="row">
-            <div class="col">
-              <img src="{{all_items[4][0][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[4][0][5]}}</p>
-            </div>
-            <div class="col img-sm">
-              <img src="{{all_items[4][1][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[4][1][5]}}</p>
-            </div>
+      {% if current_user_id == 'None' %}
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <h5 class="card-title p-3">Health & Personal Care</h5>
+            <a href="/show_item/{{order_list[0][2]}}">
+              <img src="{{order_list[0][7]}}" class="card-img-top img-lg" alt="...">
+            </a>
+            <p class="text-white">-</p>
+            <p><a href="/show_item/{{order_list[0][2]}}" class="text-decoration-none">see more</a></p>
           </div>
-          <div class="row">
-            <div class="col">
-              <img src="{{all_items[4][2][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[4][2][5]}}</p>
-            </div>
-            <div class="col">
-              <img src="{{all_items[4][3][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[4][3][5]}}</p>
-            </div>
-          </div>
-          <p><a>see more</a></p>
         </div>
-      </div>
 
       {% else %}
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <h5 class="card-title p-3">Buy again</h5>
-          <div class="row">
-            <div class="col">
-              <img src="{{all_items[5][0][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][0][1]}}</p>
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <h5 class="card-title p-3">Buy again</h5>
+            <div class="row">
+              <div class="col">
+                <a href="">
+                <!-- <a href="/show_items/{{order_list[0][4]}}"> -->
+                  <img src="{{order_list[0][9]}}" class="card-img-top img-sm" alt="...">
+                </a>  
+                <p>{{order_list[0][5]}}</p>
+              </div>
+              <div class="col img-sm">
+                <img src="{{order_list[1][9]}}" class="card-img-top img-sm" alt="...">
+                <p>{{order_list[1][5]}}</p>
+              </div>
             </div>
-            <div class="col img-sm">
-              <img src="{{all_items[5][1][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][1][1]}}</p>
+            <div class="row">
+              <div class="col">
+                <img src="{{order_list[2][9]}}" class="card-img-top img-sm" alt="...">
+                <p>{{order_list[2][5]}}</p>
+              </div>
+              <div class="col">
+                <img src="{{order_list[3][9]}}" class="card-img-top img-sm" alt="...">
+                <p>{{order_list[3][5]}}</p>
+              </div>
             </div>
+            <p><a>see more</a></p>
           </div>
-          <div class="row">
-            <div class="col">
-              <img src="{{all_items[5][2][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][2][1]}}</p>
-            </div>
-            <div class="col">
-              <img src="{{all_items[5][3][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][3][1]}}</p>
-            </div>
-          </div>
-          <p><a>see more</a></p>
         </div>
-      </div>
       {% endif %}
       
       
@@ -140,25 +148,33 @@
           <h5 class="card-title p-3">Great deal</h5>
           <div class="row">
             <div class="col">
-              <img src="{{all_items[5][0][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][0][1]}}</p>
+              <a href="/show_items/{{deal_list[0][0]}}">
+                <img src="{{deal_list[0][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{deal_list[0][1]}}</p>
             </div>
             <div class="col img-sm">
-              <img src="{{all_items[5][1][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][1][1]}}</p>
+              <a href="/show_items/{{deal_list[1][0]}}">
+                <img src="{{deal_list[1][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{deal_list[1][1]}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <img src="{{all_items[5][2][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][2][1]}}</p>
+              <a href="/show_items/{{deal_list[2][0]}}">
+                <img src="{{deal_list[2][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{deal_list[2][1]}}</p>
             </div>
             <div class="col">
-              <img src="{{all_items[5][3][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[5][3][1]}}</p>
+              <a href="/show_items/{{deal_list[3][0]}}">
+                <img src="{{deal_list[3][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{deal_list[3][1]}}</p>
             </div>
           </div>
-          <p><a>see more</a></p>
+          <p><a href="/show_item/tag={{deal_list[0][8]}}" class="text-decoration-none">see more</a></p>
         </div>
       </div>
 
@@ -172,25 +188,33 @@
           <h5 class="card-title p-3">Popular now</h5>
           <div class="row">
             <div class="col">
-              <img src="{{all_items[6][0][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[6][0][5]}}</p>
+              <a href="/show_items/{{popular_list[0][4]}}">
+                <img src="{{popular_list[0][9]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{popular_list[0][5]}}</p>
             </div>
             <div class="col img-sm">
-              <img src="{{all_items[6][1][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[6][1][5]}}</p>
+              <a href="/show_items/{{popular_list[1][4]}}">
+                <img src="{{popular_list[1][9]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{popular_list[1][5]}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <img src="{{all_items[6][2][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[6][2][5]}}</p>
+              <a href="/show_items/{{popular_list[2][4]}}">
+                <img src="{{popular_list[2][9]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{popular_list[2][5]}}</p>
             </div>
             <div class="col">
-              <img src="{{all_items[6][3][9]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[6][3][5]}}</p>
+              <a href="/show_items/{{popular_list[3][4]}}">
+                <img src="{{popular_list[3][9]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{popular_list[3][5]}}</p>
             </div>
           </div>
-          <p><a>see more</a></p>
+          <p>see more</p>
         </div>
       </div>
 
@@ -200,25 +224,33 @@
           <h5 class="card-title p-3">Pick Up</h5>
           <div class="row">
             <div class="col">
-              <img src="{{all_items[7][0][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[7][0][1]}}</p>
+              <a href="/show_items/{{pickup_list[0][0]}}">
+                <img src="{{pickup_list[0][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{pickup_list[0][1]}}</p>
             </div>
             <div class="col img-sm">
-              <img src="{{all_items[7][1][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[7][1][1]}}</p>
+              <a href="/show_items/{{pickup_list[1][0]}}">
+                <img src="{{pickup_list[1][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{pickup_list[1][1]}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <img src="{{all_items[7][2][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[7][2][1]}}</p>
+              <a href="/show_items/{{pickup_list[2][0]}}">
+                <img src="{{pickup_list[2][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{pickup_list[2][1]}}</p>
             </div>
             <div class="col">
-              <img src="{{all_items[7][3][7]}}" class="card-img-top img-sm" alt="...">
-              <p>{{all_items[7][3][1]}}</p>
+              <a href="/show_items/{{pickup_list[3][0]}}">
+                <img src="{{pickup_list[3][7]}}" class="card-img-top img-sm" alt="...">
+              </a>
+              <p>{{pickup_list[3][1]}}</p>
             </div>
           </div>
-          <p><a>see more</a></p>
+          <p><a href="/show_item/tag={{pickup_list[0][8]}}" class="text-decoration-none">see more</a></p>
         </div>
       </div>
 
@@ -226,9 +258,9 @@
       <div class="col">
         <div class="card" style="width: 18rem;">
           <h5 class="card-title p-3">Get fit at home</h5>
-          <img src="{{all_items[8][0][7]}}" class="card-img-top img-lg" alt="...">
+          <img src="{{fitness_list[0][7]}}" class="card-img-top img-lg" alt="...">
           <p class="text-white">-</p>
-          <p><a>see more</a></p>
+          <p><a href="/show_item/{{fitness_list[0][2]}}" class="text-decoration-none">see more</a></p>
         </div>
       </div>
       
@@ -237,9 +269,9 @@
       <div class="col">
         <div class="card" style="width: 18rem;">
           <h5 class="card-title p-3">Deals & Promotion</h5>
-          <img src="{{all_items[9][0][7]}}" class="card-img-top img-lg" alt="...">
+          <img src="{{promotion_list[0][7]}}" class="card-img-top img-lg" alt="...">
           <p class="text-white">-</p>
-          <p><a>see more</a></p>
+          <p><a href="/show_item/tag={{deal_list[0][8]}}" class="text-decoration-none">see more</a></p>
         </div>
       </div>
     </div>
@@ -250,10 +282,12 @@
         <h5 class="card-title p-3 text-start">Top Categories</h5>
         <div id="carousel-top-categories" class="carousel">
           <div class="carousel-inner-top-categories">
-            {% for item in all_items[1]%}
+            {% for item in category_list %}
             <div class="carousel-item-top-categories">
               <div class="image-wrapper">
-                <img src="{{item[2]}}" class="card-img-top img-sm" alt="...">
+                <a href="/show_item/{{item[1]}}">
+                  <img src="{{item[2]}}" class="card-img-top img-sm" alt="...">
+                </a>
               </div>
               <p>{{item[1]}}</p>
             </div>
@@ -280,10 +314,12 @@
         <div id="carousel-for-you" class="carousel">
           <div class="carousel-inner-for-you">
 
-            {% for item in all_items[10] %}
+            {% for item in for_you_list %}
             <div class="carousel-item-for-you">
               <div class="image-wrapper">
-                <img src="{{item[7]}}" alt="..." class="img-sm">
+                <a href="/show_items/{{item[0]}}">
+                  <img src="{{item[7]}}" alt="..." class="img-sm">
+                </a>
               </div>
               <div class="card-body">
                 <!--<h5 class="card-title">Card title</h5>-->

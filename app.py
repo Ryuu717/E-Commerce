@@ -7,12 +7,12 @@ import pandas as pd
 app = Flask(__name__)
 app.secret_key = 'random string'
 
-# Database Link
-DB_Path = 'EC.db'
 
 # Login Manager
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
+
+DB_path = 'EC.db'
 
 class User(UserMixin):
     def __init__(self, UserID, FirstName, LastName, Phone, Email):
@@ -22,8 +22,8 @@ class User(UserMixin):
          self.Phone = Phone
          self.Email = Email
          self.authenticated = False
-    def is_active(self):
-         return self.is_active()
+   #  def is_active(self):
+   #       return self.is_active()
     def is_anonymous(self):
          return False
     def is_authenticated(self):
@@ -32,12 +32,11 @@ class User(UserMixin):
          return True
     def get_id(self):
          return self.UserID
-
- 
+      
       
 @login_manager.user_loader
 def load_user(UserID):
-   con = sql.connect(DB_Path)
+   con = sql.connect(DB_path)
    cur = con.cursor()
    cur.execute("SELECT * from users where UserID = (?)",[UserID])
    user_info = cur.fetchone()
@@ -55,24 +54,21 @@ def main():
    # if str(current_user.get_id()) != 'None':
    #    logout_user()
    
+   current_user_id = str(current_user.get_id())
+   print(current_user_id)
    
-   all_items = []
-   
-   with sql.connect("EC.db") as con:
+   with sql.connect(DB_path) as con:
       cur = con.cursor()
       
       # 0. All Items
       cur.execute("select * from items")
       item_list= cur.fetchall(); 
-      all_items.append(item_list)
       
       # 1. Categories
       cur.execute("select * from categories")
       category_list= cur.fetchall(); 
-      all_items.append(category_list)
       
       # 2. Recently Viewed
-      # -->From Wish List or Log(Update Later)
       if str(current_user.get_id()) != 'None':
       # if True:
          try:
@@ -81,18 +77,15 @@ def main():
             cur.execute("select * from logs") 
       
          recently_viewed_list= cur.fetchall(); 
-         all_items.append(recently_viewed_list)
       
       else:
-         cur.execute("select * from orders")
-         order_list= cur.fetchall(); 
-         all_items.append(order_list)
+         cur.execute("select * from items where Tag = 'Electronics'")
+         recently_viewed_list= cur.fetchall(); 
    
       
       # 3. Recommended
       cur.execute("select * from items where Tag = 'Recommended'")
       recommended_list= cur.fetchall(); 
-      all_items.append(recommended_list)
       
       # 4.Buy again
       if str(current_user.get_id()) != 'None':
@@ -100,40 +93,31 @@ def main():
             cur.execute("select * from orders where UserID=?", (str(current_user.get_id())))   # if user has an order history
          except:
             cur.execute("select * from orders")    # if user doesn't have an order history
-         # cur.execute("select * from orders where UserID=?", (str(current_user.get_id())))
-         # cur.execute("select * from orders where UserID=?", (str(1)))
-         # cur.execute("select * from orders")
          order_list= cur.fetchall(); 
-         all_items.append(order_list)
       else:
-         cur.execute("select * from orders")
+         cur.execute("select * from items where Tag = 'Health & Personal Care'")
          order_list= cur.fetchall(); 
-         all_items.append(order_list)
+      
       
       # 5. Great Deal
       cur.execute("select * from items where Tag = 'Deal'")
       deal_list= cur.fetchall(); 
-      all_items.append(deal_list)
       
       # 6. Popular now
       cur.execute("select * from orders")
       popular_list= cur.fetchall(); 
-      all_items.append(popular_list)
       
       # 7. Pick up
       cur.execute("select * from items where Tag = 'Pickup'")
-      deal_list= cur.fetchall(); 
-      all_items.append(deal_list)
+      pickup_list= cur.fetchall(); 
    
       # 8. Fitness
       cur.execute("select * from items where Tag = 'Fitness'")
       fitness_list= cur.fetchall(); 
-      all_items.append(fitness_list)
       
       # 9. Promotion
       cur.execute("select * from items where Tag = 'Promotion'")
       promotion_list= cur.fetchall(); 
-      all_items.append(promotion_list)
       
       # 10. For you
       if str(current_user.get_id()) != 'None':
@@ -142,38 +126,34 @@ def main():
 
          cur.execute("select * from items where Category = ?", (for_you_list,))
          for_you_list= cur.fetchall(); 
-         all_items.append(for_you_list)
       else:
          cur.execute("select * from items")
          for_you_list = cur.fetchall(); 
-         all_items.append(for_you_list)
          
       # 11. Footer
       cur.execute("select * from footers")
       footer_list= cur.fetchall(); 
-      all_items.append(footer_list)
+      
+      # 12. Health & Personal Care
+      cur.execute("select * from items where Tag = 'Health & Personal Care'")
+      health_list= cur.fetchall(); 
          
        
-   return render_template("main.html", current_user = current_user, all_items = all_items, footer_list=footer_list)
+   return render_template("main.html", 
+                          current_user_id = current_user_id, 
+                          category_list = category_list, 
+                          recently_viewed_list = recently_viewed_list, 
+                          recommended_list = recommended_list, 
+                          order_list = order_list, 
+                          health_list = health_list,
+                          deal_list = deal_list, 
+                          popular_list = popular_list, 
+                          pickup_list = pickup_list, 
+                          fitness_list = fitness_list, 
+                          promotion_list = promotion_list, 
+                          for_you_list = for_you_list, 
+                          footer_list=footer_list)
 
-
-# @app.route("/user_main/<user_id>")
-# def user_main(user_id):
-#    item_list = []
-#    category_list = []
-   
-#    with sql.connect("EC.db") as con:
-#       cur = con.cursor()
-#       cur.execute("select * from items")
-#       item_list= cur.fetchall(); 
-      
-#       cur.execute("select * from categories")
-#       category_list= cur.fetchall(); 
-      
-#       cur.execute("select * from users where UserID = '%s'" %user_id)
-#       user_info= cur.fetchall(); 
-      
-#       return render_template("main.html", item_list = item_list, category_list = category_list, user_info = user_info)
 
 @app.route("/signin")
 def signin():
@@ -186,65 +166,119 @@ def logout():
 
 @app.route("/item")
 def item():
-   all_items = []
    
-   with sql.connect("EC.db") as con:
+   with sql.connect(DB_path) as con:
       cur = con.cursor()
-      
-      # 0. All Items
-      cur.execute("select * from items")
-      item_list= cur.fetchall(); 
-      all_items.append(item_list)
-      
+            
       # 1. Categories
       cur.execute("select * from categories")
       category_list= cur.fetchall(); 
-      all_items.append(category_list)
       
-   return render_template("item.html", all_items = all_items)
+   return render_template("item.html", category_list = category_list)
 
 @app.route("/items")
 def items():
-   all_items = []
    
-   with sql.connect("EC.db") as con:
+   with sql.connect(DB_path) as con:
       cur = con.cursor()
       
-      # 0. All Items
+      # 0. Items
       cur.execute("select * from items")
       item_list= cur.fetchall(); 
-      all_items.append(item_list)
       
       # 1. Categories
       cur.execute("select * from categories")
       category_list= cur.fetchall(); 
-      all_items.append(category_list)
       
-   return render_template("items.html", all_items = all_items)
+   return render_template("items.html", item_list = item_list, category_list = category_list)
 
+@app.route('/show_item', methods = ['GET']) 
+def show_item():
+
+   with sql.connect(DB_path) as con:
+      con.row_factory = sql.Row 
+      cur = con.cursor() 
+      
+      # 1. item
+      cur.execute("select * from orders")
+      item_list= cur.fetchall() 
+      
+      # 2. Categories
+      cur.execute("select * from categories")
+      category_list= cur.fetchall()
+      
+      # 3. Footer
+      cur.execute("select * from footers")
+      footer_list= cur.fetchall(); 
+      
+   return render_template("item.html", 
+                          category_list = category_list,
+                          item_list = item_list,
+                          footer_list=footer_list)
+
+@app.route('/show_item/<string:Category>', methods = ['GET']) 
+def show_item_category(Category):
+
+   with sql.connect(DB_path) as con:
+      con.row_factory = sql.Row 
+      cur = con.cursor() 
+      
+      # 1. item
+      cur.execute("select * from items where Category=?",(Category,)) 
+      item_list= cur.fetchall() 
+      
+      # 2. Categories
+      cur.execute("select * from categories")
+      category_list= cur.fetchall()
+      
+      # 3. Footer
+      cur.execute("select * from footers")
+      footer_list= cur.fetchall(); 
+      
+   return render_template("item.html", 
+                          item_list = item_list,
+                          category_list = category_list,
+                          footer_list=footer_list)
+
+
+@app.route('/show_items/<string:ItemID>', methods = ['GET']) 
+def show_items(ItemID):
+
+   with sql.connect(DB_path) as con:
+      con.row_factory = sql.Row 
+      cur = con.cursor() 
+      
+      # 1. item detail
+      cur.execute("select * from items where ItemID=?",(ItemID,)) 
+      item_detail= cur.fetchall() 
+      
+      
+      # 2. Related Items
+      cur.execute("select * from items where Category=?",(item_detail[0]["Category"],)) 
+      related_items= cur.fetchall() 
+   
+      # 3. Searched items(Customers also search)
+      cur.execute("select * from logs where Category=?",(item_detail[0]["Category"],)) 
+      searched_items= cur.fetchall() 
+      
+      # 1. Categories
+      cur.execute("select * from categories")
+      category_list= cur.fetchall()
+      
+      # 5. Footer
+      cur.execute("select * from footers")
+      footer_list= cur.fetchall(); 
+      
+   return render_template("items.html", 
+                          category_list = category_list,
+                          item_detail = item_detail,
+                          related_items = related_items,
+                          searched_items = searched_items,
+                          footer_list=footer_list)
 
 @app.route("/payment")
 def payment():
-   all_items = []
-   
-   with sql.connect("EC.db") as con:
-      cur = con.cursor()
-      
-      # 0. All Items
-      cur.execute("select * from items")
-      item_list= cur.fetchall(); 
-      all_items.append(item_list)
-      
-      # 1. Categories
-      cur.execute("select * from categories")
-      category_list= cur.fetchall(); 
-      all_items.append(category_list)
-      
-   return render_template("payment.html", all_items=all_items)
-
-# @app.route("/register")
-# def register():
-#    return render_template("register.html")
+   return render_template("payment.html")
 
 @app.route("/register")
 def register():
@@ -266,7 +300,7 @@ def add_account():
    item_list = []
    category_list = []
    
-   with sql.connect("EC.db") as con:
+   with sql.connect(DB_path) as con:
       cur = con.cursor()
       cur.execute("select * from items")
       item_list= cur.fetchall(); 
@@ -298,52 +332,49 @@ def add_account():
 
 @app.route('/show_account/<string:UserID>', methods = ['GET']) 
 def show_account(UserID):
-   all_items = []
    
    form = RegisterForm()
    registered_form = RegisteredForm()
    
-   with sql.connect("EC.db") as con:
+   with sql.connect(DB_path) as con:
       con.row_factory = sql.Row 
       cur = con.cursor() 
    
-      # 0. All Items
-      cur.execute("select * from items")
-      item_list= cur.fetchall()
-      all_items.append(item_list)
-      
       # 1. Categories
       cur.execute("select * from categories")
       category_list= cur.fetchall() 
-      all_items.append(category_list)
    
       # 2. Accounts
       cur.execute("select * from users where UserID=?",(UserID,)) 
       account_list= cur.fetchall()
-      all_items.append(account_list)
       
       # 3. Orders
       cur.execute("select * from orders where UserID=?",(UserID,)) 
       order_list= cur.fetchall()
-      all_items.append(order_list) 
       
       # 4. Wishes
       cur.execute("select * from items where Wishers=?",(UserID,)) 
       wisher_list= cur.fetchall(); 
-      all_items.append(wisher_list)
       
       # 5. Footer
       cur.execute("select * from footers")
       footer_list= cur.fetchall(); 
       
-   return render_template("account.html", all_items= all_items, form = form, registered_form = registered_form, footer_list=footer_list)
+   return render_template("account.html", 
+                          category_list = category_list,
+                          account_list = account_list, 
+                          order_list = order_list,
+                          wisher_list = wisher_list,
+                          form = form, 
+                          registered_form = registered_form, 
+                          footer_list=footer_list)
 
 
 @app.route('/signin_user', methods=['GET', 'POST'])
 def signin_user():
    Email = request.form['Email']
    
-   with sql.connect("EC.db") as con:
+   with sql.connect(DB_path) as con:
       cur = con.cursor()
       cur.execute("select * from users where Email=?",(Email,)) 
       # user_info= cur.fetchall()
@@ -371,7 +402,7 @@ def update_account():
    form = RegisteredForm()
 
    if form.validate_on_submit(): 
-      with sql.connect("EC.db") as con: 
+      with sql.connect(DB_path) as con: 
          cur = con.cursor() 
          cur.execute("UPDATE users SET FirstName=?, LastName=?, Address=?, Phone=?, Email=?, CardNumber=? WHERE UserID=?", (form.first_name.data, form.last_name.data, form.address.data, form.phone.data, form.email.data, form.card_number.data,current_user.UserID)) 
          con.commit()
