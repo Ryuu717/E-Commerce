@@ -176,6 +176,8 @@ def item():
       
    return render_template("item.html", category_list = category_list)
 
+
+
 @app.route("/items")
 def items():
    
@@ -253,28 +255,29 @@ def show_items(ItemID):
       item_detail= cur.fetchall() 
       
       
-      # 2. Related Items
-      cur.execute("select * from items where Category=?",(item_detail[0]["Category"],)) 
-      related_items= cur.fetchall() 
+      # #  Related Items
+      # cur.execute("select * from items where Category=?",(item_detail[0]["Category"],)) 
+      # related_items= cur.fetchall() 
    
-      # 3. Searched items(Customers also search)
-      cur.execute("select * from logs where Category=?",(item_detail[0]["Category"],)) 
-      searched_items= cur.fetchall() 
+      # #  Searched items(Customers also search)
+      # cur.execute("select * from logs where Category=?",(item_detail[0]["Category"],)) 
+      # searched_items= cur.fetchall() 
       
-      # 1. Categories
+      # Categories
       cur.execute("select * from categories")
       category_list= cur.fetchall()
       
-      # 5. Footer
+      #  Footer
       cur.execute("select * from footers")
       footer_list= cur.fetchall(); 
       
    return render_template("items.html", 
                           category_list = category_list,
                           item_detail = item_detail,
-                          related_items = related_items,
-                          searched_items = searched_items,
+                        #   related_items = related_items,
+                        #   searched_items = searched_items,
                           footer_list=footer_list)
+
 
 @app.route("/payment")
 def payment():
