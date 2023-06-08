@@ -33,7 +33,7 @@
               <div class="form-row">
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.first_name.label }} <br> 
-                  {{ registered_form.first_name(value=all_items[2][0]["FirstName"])}} <br> 
+                  {{ registered_form.first_name(value=account_list[0]["FirstName"])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.first_name.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -42,7 +42,7 @@
         
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.last_name.label }} <br> 
-                  {{ registered_form.last_name(value=all_items[2][0]["LastName"])}} <br> 
+                  {{ registered_form.last_name(value=account_list[0]["LastName"])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.last_name.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -51,7 +51,7 @@
     
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.address.label }} <br> 
-                  {{ registered_form.address(value=all_items[2][0]["Address"])}} <br> 
+                  {{ registered_form.address(value=account_list[0]["Address"])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.address.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -60,7 +60,7 @@
         
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.phone.label }} <br> 
-                  {{ registered_form.phone(value=all_items[2][0]["Phone"])}} <br> 
+                  {{ registered_form.phone(value=account_list[0]["Phone"])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.phone.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -69,7 +69,7 @@
         
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.email.label }} <br> 
-                  {{ registered_form.email(value=all_items[2][0]["Email"])}} <br> 
+                  {{ registered_form.email(value=account_list[0]["Email"])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.email.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -78,7 +78,7 @@
     
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.card_number.label }} <br> 
-                  {{ registered_form.card_number(value=all_items[2][0]["CardNumber"])}} <br> 
+                  {{ registered_form.card_number(value=account_list[0]["CardNumber"])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.card_number.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -111,15 +111,15 @@
           <tbody>
             <tr>
               <th scope="row">Name:</th>
-              <td>{{all_items[2][0]["FirstName"]}} {{all_items[2][0]["LastName"]}}</td>
+              <td>{{account_list[0]["FirstName"]}} {{account_list[0]["LastName"]}}</td>
             </tr>
             <tr>
               <th scope="row">Address:</th>
-              <td>{{all_items[2][0]["Address"]}}</td>
+              <td>{{account_list[0]["Address"]}}</td>
             </tr>
             <tr>
               <th scope="row">Phone:</th>
-              <td>{{all_items[2][0]["Phone"]}}</td>
+              <td>{{account_list[0]["Phone"]}}</td>
             </tr>
           </tbody>
         </table>
@@ -132,11 +132,11 @@
           <tbody>
             <tr>
               <th scope="row">Card 1:</th>
-              <td>Visa : {{all_items[2][0]["CardNumber"]}}   <span class="mx-2 text-danger">(Need to show only last 4 digits)</span></td>
+              <td>Visa : {{account_list[0]["CardNumber"]}}   <span class="mx-2 text-danger">(Need to show only last 4 digits)</span></td>
             </tr>
             <!-- <tr>
               <th scope="row">Card 2:</th>
-              <td>Visa : {{all_items[2][0]["CardNumber"]}}</td>
+              <td>Visa : {{account_list[0]["CardNumber"]}}</td>
             </tr> -->
           </tbody>
         </table>
@@ -148,7 +148,7 @@
         <div class="row mx-1 mb-3">
           <div id="carousel-order-history" class="carousel">
             <div class="carousel-inner-order-history">
-              {% for item in all_items[3]%}
+              {% for item in order_list%}
               <div class="carousel-item-order-history">
                 <div class="image-wrapper">
                   <img src="{{item[9]}}" alt="..." class="img-sm">
@@ -175,7 +175,7 @@
         <div class="row mx-1 mb-3">
           <div id="carousel-wish-list" class="carousel">
             <div class="carousel-inner-wish-list">
-              {% for item in all_items[4]%}
+              {% for item in wisher_list%}
               <div class="carousel-item-wish-list">
                 <div class="image-wrapper">
                   <img src="{{item[7]}}" alt="..." class="img-sm">
