@@ -6,141 +6,126 @@
   {% include "nav.html" %}
     
   <!--Item details and description -->
-  <div class="container text-center mt-5">
+  <div class="container text-start mt-5">
     <div class="row">
-      <!--<div class="col">
-        <h3>Apple Iphone 14, 256GB, Midnight</h3>
-        <img src="https://m.media-amazon.com/images/I/51Yz9FaNIGL._AC_SX679_.jpg" alt="...">
-      </div>-->
-              
-      <div class="col-9 text-start">
-        <div class = "card" style="width: 60rem;">
-          <div class="col">
-            <h4>1. Shipping Address</h4>
+      <div class="col-9">
+        <h3>1. Shipping Address</h3>        
+        <div class = "card p-3 mb-3" style="width: 60rem;">
+          <div class="row">
+            <div class="col-11">
+              <ul class = "list-unstyled">
+                <li class="">{{user_list[1]}} {{user_list[2]}}</li>
+                <li class="">{{user_list[3]}}</li>
+              </ul>            
+            </div>
+            <div class="col-1">
+              <a href="">Edit</a>
+            </div>
           </div>
-          <ul class = "list-unstyled">
-            <li class="">John Wick</li>
-            <li class="">Unit900, 75 Victoria Street West</li>
-            <li class="">Victoria Residence</li>
-            <li class="">Auckland CBD, Auckland 1010</li>
-          </ul>            
-        </div>
-        <br>
-        <div class="col">
-          <h4>2. Choose a payment method</h4>
-        </div> 
-        <br>
-        <div class = "card" style="width: 60rem;">           
-          <ul class = "list-unstyled">
-            <h5>affirm</h5>
-            <li class="">John, pay $46,28/month or less for 24 months when you select Affirm as your payment method.</li>
-            <button type="button" class="btn btn-primary">
-              Learn More <a href="/payment"></a>
-            </button>
-          </ul>            
-        </div>
-        <br>
-        <div class = "card" style="width: 60rem;">           
-          <ul class = "list-unstyled">
-            <h5>Your credit and debit cards</h5>
-            <li class="">+ Add a credit or debit card</li>       
-          </ul>            
-        </div>
-        <br>
-        <div class = "card" style="width: 60rem;">           
-          <ul class = "list-unstyled">
-            <h5>Payment plans</h5>
-            <li class="">Pay over time with Affirm</li>  
-            <li class="">Ineligible for this order. Learn more</li>     
-          </ul>            
-        </div>
-        <br>
-        <div class = "card" style="width: 60rem;">           
-          <ul class = "list-unstyled">
-            <h5>Other payment methods</h5>
-            <li class="">+ Learn more about the EC Store Card > Access to exclusive financing offers. Zero fraud liability. </li>  
-            <li class="">+ Add a personal checking account
-              <li>Use your personal checking account
-                <li>Learn more</li>
-              </li>
-            </li>
-            <li class="">+ Add your Venmo account</li>     
-          </ul>            
-        </div>
-        <br>
-        <div class = "card" style="width: 60rem;">
-          <div class="col">
-            <h4>3. Offers</h4>
-          </div>
-          </ul>            
-        </div>
-        <br>
-        <div class = "card" style="width: 60rem;">
-          <div class="col">
-            <h4>4. Items and Shipping</h4>
-          </div>
-          </ul>            
         </div>
 
-          <!--<div class = "card" style="width: 30rem;">            
-          <ul class = "list-unstyled">
-            <li class="">Vibrant 6.1-inch Super Retina XDR display with OLED technology. Action mode for smooth, steady, handheld videos.</li>
-            <br>
-            <li class="">High resolution & color accuracy make everything look sharp & true to life.</li>
-            <br>
-            <li class="">New Main camera & improved image processing to capture your shots in all kinds of light - especially low light.</li>
-            <br>
-            <li class="">4K Cinematic mode at 24 fps automatically shifts focus to the most important subject in a scene.</li>
-            <br>
-            <li class="">A15 Bionic, with a 5-core GPU for lightning-fast performance. Superfast 5G.</li>
-            <br>
-            <li class="">Manufacturer: Apple Computer</li>
-          </ul>            
-        </div> -->
+        <h3>2. Choose a payment method</h3>   
+        <div class = "card p-3 mb-3" style="width: 60rem;">
+          <div class="row">
+            <div class="col-11">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Visa: {{user_list["CardNumber"]}}
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Visa: ****-****-2222 (Need to show last 4 digits)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Pay later
+                </label>
+              </div>
+            </div>
+
+            <div class="col-1">
+              <a href="">Edit</a>
+            </div>
+          </div>
+        </div>
+        
+
+        <h3 >3. Offers</h3>
+        <div class="card p-3 mb-3" style="width: 60rem;">
+          {% for item in cart_list %}
+            <div class="text-start">
+              <div class="row">
+                <div class="col-4 p-2 text-center m-auto">
+                    <img src="{{item[11]}}" class="img-fluid rounded-start img-sm" alt="...">
+                </div>
+                <div class="col-8">
+                  <div class="card-body my-0 py-2">
+                    <h5 class="card-title">{{item["ItemName"]}}</h5>
+                    <p class="card-text">{{item["Detail"]}}</p>
+                    <small class="text-body-secondary">Rating
+                      {{item[9]}}
+                      {% for n in range(item[9]) %}
+                      <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                      {% endfor%}
+                    </small><br>
+                    <div class="my-2">
+                      <span>Item Count: </span>
+                      <form action="update_cart/{{item[0]}}", method="post">
+                        <input type="number" id="" name="quantity" min="1" max="5" value="{{item[12]}}">
+                        <button type="submit" class="btn btn-link" name="update">Update</button>
+                        <button type="submit" class="btn btn-link" name="delete" formaction="delete_cart/{{item[0]}}">Delete</button>
+                      </form>
+                    </div>
+                    <p class="card-text my-2">NZD {{item["Price"]}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-0">
+          {% endfor %}        
+        </div>
+
+        <h3>4. Shipping</h3>   
+        <div class = "card p-3 mb-3" style="width: 60rem;">
+          <p>Estimated Delivery Date: <span class="mx-3">{{delivery_date}}</span></p>
+        </div>
+
+
       </div>
 
       <div class = "col">
-        <div class = "card" style="width: 18rem;">
-         <p>Use this payment method</p>
-         <ul class = "list-unstyled">
-            <li class="">Choose a payment method to continue checking out. You'll still have a chance to review and edit your order before it's final.</li>
-            <li class="">___________________________________________</li>
-            <br>
-            <h4>Order summary</h4>
-            <li class="">Items: $ 707</li>
-            <li class="">Shipping & handeling: --</li>
-            <li class="">_______________________</li>
-            <br>
-            <li class="">Total before tax: --</li>
-            <li class="">Estimated tax to be collected: --</li>
-            <li class="">Import Fees Deposit: --</li>
-            <li class="">______________________________________</li>
-            <h4>Order Total:  --</h4>
-            <li class="">___________________________________________</li>
-            <br>
-            <li class="">You can track your shipment and view any applicable import fees deposit before placing your order. Learn more </li>
-            <br>
-            <li class="">How are shipping costs calculated?</li>
-            <br>
-         </ul>
+        <h3>Order Summary</h3>
+        <div class = "card p-3" style="width: 18rem;">
+          <div class="d-flex justify-content-between">
+            <p class="m-0">Items:</p>
+            <p class="m-0">$ {{total_cost}}</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="m-0">Shipping & handeling:</p>
+            <p class="m-0">$ 10</p>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between text-danger mb-3">
+            <h5 class="m-0">Order Total:</h5>
+            <h5 class="m-0">$ {{total_cost + 10}}</h5>
+          </div>
+          <button class="btn btn-success my-3">
+            <a href="/success/order" class="text-decoration-none text-white">Place your order</a>
+          </button>
+          <p class="text-end"><small>Estimated Delivery Date: {{delivery_date}}</small></p>
         </div>
-
-
       </div>
-
-
 
     </div>
   </div>
 
-  
-
-
-  
-
    <!--Footer-->
   {% include "footer.html" %}
-
 
   </body>
 </html>

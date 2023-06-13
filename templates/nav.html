@@ -55,8 +55,11 @@
                 </div>
               </div>
             </div> -->
-
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{current_user.FirstName}}</a>
+            {% if current_user.UserType == "Guest"%}
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Guest</a>
+            {% else %}
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{current_user.FirstName}}</a>
+            {% endif %}
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/show_account/{{current_user.UserID}}">My Page</a></li>
               <li><a class="dropdown-item" href="/logout">Log out</a></li>
@@ -75,13 +78,22 @@
         </li>
         <!--Oders-->
         <li class="nav-item">
-          <a class="nav-link" href="#">Orders</a>
+          <a class="nav-link" href="/orders/{{current_user_id}}">Orders</a>
         </li>
         <!--Cart-->
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/payment/{{current_user_id}}">
+          <!-- <a class="nav-link" href="/payment/0"> -->
             <i class="fa-solid fa-cart-shopping position-relative" style="color: #ffffff;">
-              <span class="position-absolute top-0 start-10 translate-middle badge rounded-pill bg-danger">3</span>
+              {% if current_user_id == 'None' %}
+                <!-- Cart badge is none -->
+              {% else %}
+                {% if cart_list_num == 0 %}
+                  <!-- Cart badge is none -->
+                {% else %}
+                  <span class="position-absolute top-0 start-10 translate-middle badge rounded-pill bg-danger">{{cart_list_num}}</span>
+                {% endif %}
+              {% endif %}
             </i>
           </a>
         </li>

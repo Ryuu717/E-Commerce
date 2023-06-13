@@ -9,80 +9,87 @@
     <div class="container text-center mt-5">
       <div class="row">
         <div class="col">
-          <h3>{{item_detail[0]["ItemName"]}}</h3>
-          <img src="{{item_detail[0]['ImageURL']}}" alt="...">
+          <h3 class="mb-3">{{item_detail[0]["ItemName"]}}</h3>
+          <img class="img-lg" src="{{item_detail[0]['ImageURL']}}" alt="...">
         </div>
                 
         <div class="col-6">
-          <div class = "card" style="width: 30rem;">
-            <p>Item Details</p>
+          <h4 class="text-center">Item Detail</h4>
+          <div class = "card text-start p-2" style="width: 40rem;">
             <ul class = "list-unstyled">
-              <li class="">Apple Iphone 14, 256GB, Midnight</li>
-              <li class=""> 5 ⭐️⭐️⭐️⭐️⭐️</li>
-              <li class="">$ 707</li>
-              <li class="">Color: Midnight</li>
+              <li class="py-1">{{item_detail[0]['Detail']}}</li>
+              <li class="py-1">
+                {{item_detail[0]['Rating']}}
+                {% for n in range(item_detail[0]['Rating']) %}
+                <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                {% endfor%}
+              </li>
+              <li class="py-1">$ {{item_detail[0]['Price']}}</li>
+              <!-- <li class="">Color: Midnight</li>
               <li class="">Service Provided: Unlocked</li>
-              <li class="">Size: 256GB</li>
+              <li class="">Size: 256GB</li> -->
             </ul>            
           </div>
           <br>
-          <div class = "card" style="width: 30rem;">            
+          <div class = "card" style="width: 40rem;">            
             <ul class = "list-unstyled">
-              <li class="">Brand : Apple </li>
-              <li class="">Model Name : Iphone 14</li>
-              <li class="">Wireless Carrier : Unlocked</li>
-              <li class="">Cellular Technology : 5G</li>
-              <li class="">Memory Storage Capacity : 256GB</li>
-              <li class="">Connectivity technologies : Wi-Fi</li>
-              <li class="">Color : Midnight</li>
-              <li class="">Screen Size : 6.1 Inches</li>
-              <li class="">Wireless Network Technology : GSM, LTE</li>
-              <li class="">SIM Card Slot Count : Dual-SIM</li>
+              <li class="text-danger">Another Detail(Need to add more)</li>
             </ul>            
           </div>
           <br>
-      <!--<div class = "card" style="width: 30rem;">            
-            <ul class = "list-unstyled">
-              <li class="">Vibrant 6.1-inch Super Retina XDR display with OLED technology. Action mode for smooth, steady, handheld videos.</li>
-              <br>
-              <li class="">High resolution & color accuracy make everything look sharp & true to life.</li>
-              <br>
-              <li class="">New Main camera & improved image processing to capture your shots in all kinds of light - especially low light.</li>
-              <br>
-              <li class="">4K Cinematic mode at 24 fps automatically shifts focus to the most important subject in a scene.</li>
-              <br>
-              <li class="">A15 Bionic, with a 5-core GPU for lightning-fast performance. Superfast 5G.</li>
-              <br>
-              <li class="">Manufacturer: Apple Computer</li>
-            </ul>            
-          </div> -->
         </div>
 
         <div class = "col">
-          <div class = "card" style="width: 18rem;">
-           <p>Payment</p>
-           <ul class = "list-unstyled">
-              <li class="">Good condition</li>
-              <li class="">Price: $ 707</li>
-              <li class="">Delivery May 29 - June 16</li>
-              <li class="">Fast delivery May 29 - June 6</li>
-              <br>
-              <li class="">Delivery to New Zealand</li>
-              <br>
-              <a href="/payment">
-                <button type="button" class="btn btn-primary">Pay Now</button>
+          <h4 class="text-center">Payment</h4>
+          <div class = "card p-2" style="width: 18rem;">
+            <div class="d-flex justify-content-between">
+              <p class="m-0">Price:</p>
+              <p class="m-0">$ {{item_detail[0]['Price']}}</p>
+            </div>
+            <!-- <div class="d-flex justify-content-between">
+              <p class="m-0">Shipping & handeling:</p>
+              <p class="m-0">$ 10</p>
+            </div> -->
+            <ul class="list-unstyled text-danger my-3">
+              <li>Estimated Delivery Date:</li>
+              <li>{{delivery_date}}</li>
+            </ul>
+
+            <p>Delivery to New Zealand</p>
+
+            {% if current_user_id == 'None' %}
+              <a class="d-grid gap-2 p-2" href="/signin">
+                <button type="button" class="btn btn-success">Order</button>
               </a>
-              <br>
-              <br>
-              <li class="">Acceptable condition (Refurbished) 689.99$ </li>
-           </ul>
+              <!-- <a class="d-grid gap-2 p-2" href="/payment/guest">
+                <button type="button" class="btn btn-secondary">Order as Guest</button>
+              </a> -->
+              <p><small>(Please enter your information before your order)</small></p>
+            {% else %}
+              <form action="/add_cart/{{item_detail[0][0]}}", method="post">
+                <div class="">
+                  <span>Item Count: </span>
+                  <input type="number" id="" name="quantity" min="1" max="5" value="1">
+                </div>
+                <a class="d-grid gap-2 p-2" href="/add_cart/{{item_detail[0][0]}}">
+                  <button type="submit" class="btn btn-secondary">Add Cart</button>
+                </a>
+                <a class="d-grid gap-2 p-2">
+                  <button type="submit" class="btn btn-success" formaction="/pay_now/{{item_detail[0][0]}}" name = "go_payment" value="go_payment">Pay Now</button>
+                </a>
+              </form>
+
+              
+            {% endif %}
+            <!-- <a class="d-grid gap-2 p-2" href="/payment/{{current_user_id}}">
+              <button type="submit" class="btn btn-success">Pay Now</button>
+            </a> -->
+            <!-- <br>
+            <br>
+            <li class="text-danger">Acceptable condition (Refurbished) 689.99$ (Need to update)</li> -->
+           
           </div>
-
-
         </div>
-
-
-
       </div>
     </div>
 
@@ -92,55 +99,16 @@
         <h5 class="card-title p-3 text-start">Products related to this item</h5>
         <div id="carousel-related-items" class="carousel">
           <div class="carousel-inner-related-items">
+            {% for item in related_items %}
             <div class="carousel-item-related-items">
               <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+                <a href="/show_items/{{item['ItemID']}}">
+                  <img src="{{item['ImageURL']}}" alt="..." class="img-sm">
+                </a>
               </div>
-              <p>Product name</p>
+              <p class="text-center">{{item["ItemName"]}}</p>
             </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <p>Product name</p>
-            </div>
-
+            {% endfor %}
           </div>
           <button class="carousel-control-related-items-prev" type="button" data-bs-target="#carousel-related-items" data-bs-slide="prev">
             <span class="carousel-control-related-items-prev-icon" aria-hidden="true"></span>
@@ -161,110 +129,24 @@
         <div id="carousel-customers-search " class="carousel">
           <div class="carousel-inner-customers-search ">
 
-            <div class="carousel-item-customers-search ">
+            {% for item in searched_items %}
+            <div class="carousel-item-related-items">
               <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
+                <a href="/show_items/{{item['ItemID']}}">
+                  <img src="{{item['ImageURL']}}" alt="..." class="img-sm">
+                </a>
               </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
+              <p class="text-center">{{item["ItemName"]}}</p>
+              <div class="card-body text-center">
+                <p class="card-text"><small class="text-body-secondary">{{item["Detail"]}}</small></p>
+                {{item["Rating"]}}
+                {% for n in range(item["Rating"]) %}
+                  <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                {% endfor%}
+                <p class="card-text mt-2">$ {{item["Price"]}}</p>
               </div>
             </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
-            <div class="carousel-item-customers-search ">
-              <div class="image-wrapper">
-                <img src="https://i.etsystatic.com/11394497/r/il/59f935/3629235433/il_fullxfull.3629235433_4l5e.jpg" alt="...">
-              </div>
-              <div class="card-body">
-                <!--<h5 class="card-title">Card title</h5>-->
-                <p class="card-text"><small class="text-body-secondary">Item detail. Bob is a Minion who is more childish and immature than most of the other Minions.</small></p>
-                <p class="card-text"><small class="text-body-secondary"><i class="fa-solid fa-star" style="color: #ffd500;"></i>Rating</small></p>
-                <p class="card-text">NZ$100</p>
-                <p class="card-text"><small class="text-body-secondary">Item detail comes here</small></p>
-                <!--<a href="#" class="btn btn-primary">Detail</a>-->
-              </div>
-            </div>
+            {% endfor %}
 
           </div>
           <button class="carousel-control-customers-search-prev" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="prev">
