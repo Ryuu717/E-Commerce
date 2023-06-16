@@ -64,7 +64,7 @@
               <li><a class="dropdown-item" href="/show_account/{{current_user.UserID}}">My Page</a></li>
               <li><a class="dropdown-item" href="/logout">Log out</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Oders</a></li>
+              <li><a class="dropdown-item" href="/orders/{{current_user_id}}">Oders</a></li>
               <li><a class="dropdown-item" href="#">-</a></li>
             </ul>
           {% else %}
@@ -76,10 +76,20 @@
             </ul>
           {% endif %}
         </li>
+
         <!--Oders-->
-        <li class="nav-item">
-          <a class="nav-link" href="/orders/{{current_user_id}}">Orders</a>
-        </li>
+        {% if current_user_id == "None" %}
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/None">Orders</a>
+            <!-- <a class="nav-link" href="/orders/{{current_user_id}}/{{user_order_count}}">Orders</a> -->
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/orders/{{current_user_id}}">Orders</a>
+            <!-- <a class="nav-link" href="/orders/{{current_user_id}}/{{user_order_count}}">Orders</a> -->
+          </li>
+        {% endif %}
+
         <!--Cart-->
         <li class="nav-item">
           <a class="nav-link" href="/payment/{{current_user_id}}">
