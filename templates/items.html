@@ -15,7 +15,7 @@
                 
         <div class="col-6">
           <h4 class="text-center">Item Detail</h4>
-          <div class = "card text-start p-2" style="width: 40rem;">
+          <div class = "card text-start p-3" style="width: 40rem;">
             <ul class = "list-unstyled">
               <li class="py-1">{{item_detail[0]['Detail']}}</li>
               <li class="py-1">
@@ -42,7 +42,7 @@
         <div class = "col">
           <h4 class="text-center">Payment</h4>
           <div class = "card p-2" style="width: 18rem;">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between p-2">
               <p class="m-0">Price:</p>
               <p class="m-0">$ {{item_detail[0]['Price']}}</p>
             </div>
@@ -78,15 +78,7 @@
                   <button type="submit" class="btn btn-success" formaction="/pay_now/{{item_detail[0][0]}}" name = "go_payment" value="go_payment">Pay Now</button>
                 </a>
               </form>
-
-              
             {% endif %}
-            <!-- <a class="d-grid gap-2 p-2" href="/payment/{{current_user_id}}">
-              <button type="submit" class="btn btn-success">Pay Now</button>
-            </a> -->
-            <!-- <br>
-            <br>
-            <li class="text-danger">Acceptable condition (Refurbished) 689.99$ (Need to update)</li> -->
            
           </div>
         </div>
@@ -102,11 +94,11 @@
             {% for item in related_items %}
             <div class="carousel-item-related-items">
               <div class="image-wrapper">
-                <a href="/show_items/{{item['ItemID']}}">
-                  <img src="{{item['ImageURL']}}" alt="..." class="img-sm">
+                <a href="/show_items/{{item[0]}}">
+                  <img src="{{item[7]}}" alt="..." class="img-sm">
                 </a>
               </div>
-              <p class="text-center">{{item["ItemName"]}}</p>
+              <p class="text-center">{{item[1]}}</p>
             </div>
             {% endfor %}
           </div>
@@ -132,18 +124,18 @@
             {% for item in searched_items %}
             <div class="carousel-item-related-items">
               <div class="image-wrapper">
-                <a href="/show_items/{{item['ItemID']}}">
-                  <img src="{{item['ImageURL']}}" alt="..." class="img-sm">
+                <a href="/show_items/{{item[0]}}">
+                  <img src="{{item[7]}}" alt="..." class="img-sm">
                 </a>
               </div>
-              <p class="text-center">{{item["ItemName"]}}</p>
+              <p class="text-center">{{item[1]}}</p>
               <div class="card-body text-center">
-                <p class="card-text"><small class="text-body-secondary">{{item["Detail"]}}</small></p>
+                <p class="card-text"><small class="text-body-secondary">{{item[4]}}</small></p>
                 {{item["Rating"]}}
-                {% for n in range(item["Rating"]) %}
+                {% for n in range(item[5]) %}
                   <i class="fa-solid fa-star" style="color: #ffd500;"></i>
                 {% endfor%}
-                <p class="card-text mt-2">$ {{item["Price"]}}</p>
+                <p class="card-text mt-2">$ {{item[3]}}</p>
               </div>
             </div>
             {% endfor %}

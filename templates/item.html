@@ -13,144 +13,148 @@
         <div class="col-4">
           <ul class="list-group text-start">
           <li class="list-group-item">
-          <ul class="list-unstyled">
-            <p>Department</p>
-          <li class="">-</li>
-            <li class="">-</li>
-            <li class="">-</li>
+
+            {% if data_source == "items" %}
+            <ul class="list-unstyled m-2">
+              <div class="d-flex justify-content-between">
+                <h6 class="m-0">Review:</h6>
+                <li class="text-end">
+                  <a href="/show_item/{{item_list[0][2]}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+                </li>
+              </div>
+              <li class="mx-3">
+                <!-- <a href="/show_item/{{item_list[0][2]}}/rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a> -->
+                <a href="/show_item/{{item_list[0][2]}}_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
+              </li>
             </ul>
-            <ul class="list-unstyled">
-              <p>Review</p>
-              <!--<li class=""><i class="fa-solid fa-star" style="color: #f7ef18;"></i>1 Star 😇 </li>-->
-              <li class="">⭐️⭐️⭐️⭐️⭐️  5 Star 😇 </li>
-              <li class="">⭐️⭐️⭐️⭐️   4  Star 😇 </li>
-              <li class="">⭐️⭐️⭐️⭐️⭐️5 Star 😇 </li>
-              <li class="">⭐️⭐️⭐️⭐️⭐️5 Star 😇 </li>
-              <li class="">⭐️⭐️⭐️⭐️⭐️5 Star 😇 </li>
+            <ul class="list-unstyled  m-3">
+              <h6>Prices</h6>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
+              </li>
+            </ul>
+            <ul class="list-unstyled  m-3">
+              <h6>Others</h6>
+              <li class="">-</li>
               <li class="">-</li>
               <li class="">-</li>
             </ul>
-            <ul class="list-unstyled">
-            <p>Brands</p>
-            <li class="">-</li>
-            <li class="">-</li>
-            <li class="">-</li>
+            {% else %}
+            <ul class="list-unstyled m-2">
+              <div class="d-flex justify-content-between">
+                <h6 class="m-0">Review:</h6>
+                <li class="text-end">
+                  <!-- <a href="/show_item/{{item_list[0][2]}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a> -->
+                  <a href="/show_item/recently_viewed_{{current_user_id}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+                </li>
+              </div>
+              <li class="mx-3">
+                <!-- <a href="/show_item/{{item_list[0][2]}}/rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a> -->
+                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
+              </li>
             </ul>
-            <ul class="list-unstyled">
-              <p>Prices</p>
+            <ul class="list-unstyled  m-3">
+              <h6>Prices</h6>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
+              </li>
+              <li class="mx-3">
+                <a href="/show_item/{{item_list[0][2]}}_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
+              </li>
+            </ul>
+            <ul class="list-unstyled  m-3">
+              <h6>Others</h6>
               <li class="">-</li>
               <li class="">-</li>
               <li class="">-</li>
-              </ul>
-              <ul class="list-unstyled">
-                <p>Deals & Discounts</p>
-                <li class="">-</li>
-                <li class="">-</li>
-                <li class="">-</li>
-                </ul>
-                <ul class="list-unstyled">
-                  <p>Item Weight</p>
-                  <li class="">-</li>
-                  <li class="">-</li>
-                  <li class="">-</li>
-                  </ul>
-                  <ul class="list-unstyled">
-                    <p>Item Condition</p>
-                    <li class="">-</li>
-                    <li class="">-</li>
-                    <li class="">-</li>
-                    </ul>
-                    <ul class="list-unstyled">
-                      <p>Availability</p>
-                      <li class="">-</li>
-                      <li class="">-</li>
-                      <li class="">-</li>
-                      </ul>
+            </ul>
+            {% endif %}
           </li>
-          </ul>
-            </div>
+        </ul>
+      </div>
         
         <!--Items-->
         <div class="col-8">
-          <!--First Card-->
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._AC_UY436_FMwebp_QL65_.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">BENGOO G9000 Stereo Gaming Headset</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          {% if data_source == "items" %}
+            {% for item in item_list %}
+              <div class="card mb-3 text-start" style="max-width: 700px;">
+                <div class="row g-0">
+                  <div class="col-md-4 p-2">
+                    <!-- <a href="/show_items/{{item['Category']}}"> -->
+                    <a href="/show_items/{{item['ItemID']}}">
+                      <img src="{{item['ImageURL']}}" class="img-fluid rounded-start img-lg" alt="...">
+                    </a>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{item['ItemName']}}</h5>
+                      <p class="card-text">{{item['Detail']}}</p>
+                      <small class="text-body-secondary">Rating
+                        {{item['Rating']}}
+                        {% for n in range(item['Rating']) %}
+                        <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                        {% endfor%}
+                      </small>
+                      <p class="card-text my-3">NZD {{item['Price']}}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!--Second Card-->
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://m.media-amazon.com/images/I/71HtN4qqLZL._AC_UY327_FMwebp_QL65_.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">SAMSUNG Galaxy S23 Ultra Cell Phone</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            {% endfor %}
+          {% else %}
+            {% for item in item_list %}
+                <div class="card mb-3 text-start" style="max-width: 700px;">
+                  <div class="row g-0">
+                    <div class="col-md-4 p-2">
+                      <a href="/show_items/{{item[4]}}">
+                        <img src="{{item[11]}}" class="img-fluid rounded-start img-lg" alt="...">
+                      </a>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{item[5]}}</h5>
+                        <p class="card-text">{{item[8]}}</p>
+                        <small class="text-body-secondary">Rating
+                          {{item[9]}}
+                          {% for n in range(item[9]) %}
+                          <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                          {% endfor%}
+                        </small>
+                        <p class="card-text my-3">NZD {{item[3]}}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!--Third Card-->
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://m.media-amazon.com/images/I/61qIbyY0NPL._AC_UL600_FMwebp_QL65_.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">NUBWO G06 Wireless Gaming Headset</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fourth Card-->
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://m.media-amazon.com/images/I/518bzP8VW1L._AC_UY327_FMwebp_QL65_.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Apple iPhone 14 Pro</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--Fifth Card-->
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="https://m.media-amazon.com/images/I/71xNjrzG69L._AC_UY327_FMwebp_QL65_.jpg" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Logitech G733 Lightspeed Wireless Gaming Headset</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
+            {% endfor %}
+          {% endif %}
         </div>
-
 
 
       </div>

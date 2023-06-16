@@ -7,118 +7,259 @@
     
   <!--Item details and description -->
   <div class="container text-start mt-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %} 
+        <ul class='list-unstyled mesage'> 
+            {% for message in messages %} 
+                <li class="text-center text-danger"><h2>{{ message }}</h2></li> 
+            {% endfor %} 
+        </ul> 
+    {% endif %} 
+    {% endwith %}
+
+
     <div class="row">
-      <div class="col-9">
-        <h3>1. Shipping Address</h3>        
-        <div class = "card p-3 mb-3" style="width: 60rem;">
-          <div class="row">
-            <div class="col-11">
-              <ul class = "list-unstyled">
-                <li class="">{{user_list[1]}} {{user_list[2]}}</li>
-                <li class="">{{user_list[3]}}</li>
-              </ul>            
-            </div>
-            <div class="col-1">
-              <a href="">Edit</a>
-            </div>
-          </div>
-        </div>
-
-        <h3>2. Choose a payment method</h3>   
-        <div class = "card p-3 mb-3" style="width: 60rem;">
-          <div class="row">
-            <div class="col-11">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Visa: {{user_list["CardNumber"]}}
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Visa: ****-****-2222 (Need to show last 4 digits)
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Pay later
-                </label>
+        <div class="col-9"> 
+          {% if current_user_id == "None" %}
+            <h3 >Your Cart</h3>
+            <div class="card p-3 mb-3" style="width: 60rem;">
+              <div class="card-body mb-5 pb-5">
+                <h4>No cart items</h4>
               </div>
             </div>
+          {% else %}
+          <h3>1. Shipping Address</h3>        
+          <div class = "card p-3 mb-3" style="width: 60rem;">
+            <div class="row">
+              <div class="col-11">
+                <ul class = "list-unstyled">
+                  <li class="">Name: {{user_list[1]}} {{user_list[2]}}</li>
+                  {% if user_list[3] %}
+                  <li class="">Address: <span>{{user_list[3]}}</span></li>
+                  {% else %}
+                  <li class="">Address: <span class="text-danger">{{user_list[3]}}</span></li>
+                  {% endif %}
+                </ul>            
+              </div>
+              <div class="col-1">
+                <!-- <a href="">Edit</a> -->
+                <a href="" class="text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+              </div>
 
-            <div class="col-1">
-              <a href="">Edit</a>
-            </div>
-          </div>
-        </div>
-        
 
-        <h3 >3. Offers</h3>
-        <div class="card p-3 mb-3" style="width: 60rem;">
-          {% for item in cart_list %}
-            <div class="text-start">
-              <div class="row">
-                <div class="col-4 p-2 text-center m-auto">
-                    <img src="{{item[11]}}" class="img-fluid rounded-start img-sm" alt="...">
-                </div>
-                <div class="col-8">
-                  <div class="card-body my-0 py-2">
-                    <h5 class="card-title">{{item["ItemName"]}}</h5>
-                    <p class="card-text">{{item["Detail"]}}</p>
-                    <small class="text-body-secondary">Rating
-                      {{item[9]}}
-                      {% for n in range(item[9]) %}
-                      <i class="fa-solid fa-star" style="color: #ffd500;"></i>
-                      {% endfor%}
-                    </small><br>
-                    <div class="my-2">
-                      <span>Item Count: </span>
-                      <form action="update_cart/{{item[0]}}", method="post">
-                        <input type="number" id="" name="quantity" min="1" max="5" value="{{item[12]}}">
-                        <button type="submit" class="btn btn-link" name="update">Update</button>
-                        <button type="submit" class="btn btn-link" name="delete" formaction="delete_cart/{{item[0]}}">Delete</button>
-                      </form>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Edit information</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <p class="card-text my-2">NZD {{item["Price"]}}</p>
+                    <div class="modal-body">
+                      <form class="" action="/update_payment", method="post">
+
+                          {{ registered_form.hidden_tag() }} 
+                
+                          <div class="form-row">
+                            <div class="form-group col-md-10 mb-2">
+                              {{ registered_form.first_name.label }} <br> 
+                              {{ registered_form.first_name(value=account_list[0]["FirstName"])}} <br> 
+                              <!-- Error Message -->
+                              {% for message in registered_form.first_name.errors %} 
+                                <div class="text-danger">{{message}}</div> 
+                              {% endfor %} 
+                            </div>
+                    
+                            <div class="form-group col-md-10 mb-2">
+                              {{ registered_form.last_name.label }} <br> 
+                              {{ registered_form.last_name(value=account_list[0]["LastName"])}} <br> 
+                              <!-- Error Message -->
+                              {% for message in registered_form.last_name.errors %} 
+                                <div class="text-danger">{{message}}</div> 
+                              {% endfor %} 
+                            </div>
+                
+                            <div class="form-group col-md-10 mb-2">
+                              {{ registered_form.address.label }} <br> 
+                              {{ registered_form.address(value=account_list[0]["Address"])}} <br> 
+                              <!-- Error Message -->
+                              {% for message in registered_form.address.errors %} 
+                                <div class="text-danger">{{message}}</div> 
+                              {% endfor %} 
+                            </div>
+                    
+                            <div class="form-group col-md-10 mb-2">
+                              {{ registered_form.phone.label }} <br> 
+                              {{ registered_form.phone(value=account_list[0]["Phone"])}} <br> 
+                              <!-- Error Message -->
+                              {% for message in registered_form.phone.errors %} 
+                                <div class="text-danger">{{message}}</div> 
+                              {% endfor %} 
+                            </div>
+                    
+                            <div class="form-group col-md-10 mb-2">
+                              {{ registered_form.email.label }} <br> 
+                              {{ registered_form.email(value=account_list[0]["Email"])}} <br> 
+                              <!-- Error Message -->
+                              {% for message in registered_form.email.errors %} 
+                                <div class="text-danger">{{message}}</div> 
+                              {% endfor %} 
+                            </div>
+                
+                            <div class="form-group col-md-10 mb-2">
+                              {{ registered_form.card_number.label }} <br> 
+                              {{ registered_form.card_number(value=account_list[0]["CardNumber"])}} <br> 
+                              <!-- Error Message -->
+                              {% for message in registered_form.card_number.errors %} 
+                                <div class="text-danger">{{message}}</div> 
+                              {% endfor %} 
+                            </div>
+                    
+                            </div>
+                        </div>
+                        <!-- <input type="submit" name="Go Back to home" class="btn btn-success col-md-12 my-3"/> -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-success">Save changes</button>
+                        </div>
+                      </form>
                   </div>
                 </div>
               </div>
+
             </div>
-            <hr class="my-0">
-          {% endfor %}        
-        </div>
+          </div>
 
-        <h3>4. Shipping</h3>   
-        <div class = "card p-3 mb-3" style="width: 60rem;">
-          <p>Estimated Delivery Date: <span class="mx-3">{{delivery_date}}</span></p>
-        </div>
+          <h3>2. Choose a payment method</h3>   
+          <div class = "card p-3 mb-3" style="width: 60rem;">
+            <div class="row">
+              <div class="col-11">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                  {% if user_list["CardNumber"] %}
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Visa: {{user_list["CardNumber"]}}
+                  </label>
+                  {% else %}
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Visa: <span class="text-danger">{{user_list["CardNumber"]}}</span>
+                  </label>
+                  {% endif %}
+                </div>
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Visa: ****-****-2222 (Need to show last 4 digits)
+                  </label>
+                </div> -->
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Pay later
+                    <a href="https://www.affirm.com/" target=”_blank” class="px-2">more info</a>
+                  </label>
+                </div>
+              </div>
 
+              <div class="col-1">
+                <a href="" class="text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+              </div>
+            </div>
+          </div>
+          
+
+          <h3 >3. Offers</h3>
+          <div class="card p-3 mb-3" style="width: 60rem;">
+            {% for item in cart_list %}
+              <div class="text-start">
+                <div class="row">
+                  <div class="col-4 p-2 text-center m-auto">
+                      <img src="{{item[11]}}" class="img-fluid rounded-start img-sm" alt="...">
+                  </div>
+                  <div class="col-8">
+                    <div class="card-body my-0 py-2">
+                      <h5 class="card-title">{{item["ItemName"]}}</h5>
+                      <p class="card-text">{{item["Detail"]}}</p>
+                      <small class="text-body-secondary">Rating
+                        {{item[9]}}
+                        {% for n in range(item[9]) %}
+                        <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                        {% endfor%}
+                      </small><br>
+                      <div class="my-2">
+                        <span>Item Count: </span>
+                        <form action="update_cart/{{item[0]}}", method="post">
+                          <input type="number" id="" name="quantity" min="1" max="5" value="{{item[12]}}">
+                          <button type="submit" class="btn btn-link" name="update">Update</button>
+                          <button type="submit" class="btn btn-link" name="delete" formaction="delete_cart/{{item[0]}}">Delete</button>
+                        </form>
+                      </div>
+                      <p class="card-text my-2">NZD {{item["Price"]}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-0">
+            {% endfor %}        
+          </div>
+
+          <h3>4. Shipping</h3>   
+          <div class = "card p-3 mb-3" style="width: 60rem;">
+            <p>Estimated Delivery Date: 
+              {% if cart_list_num == 0 %}
+                <span class="mx-3"></span></p>
+              {% else %}
+                <span class="mx-3">{{delivery_date}}</span></p>
+              {% endif %}
+          </div>
+
+        {% endif %}
 
       </div>
 
       <div class = "col">
         <h3>Order Summary</h3>
-        <div class = "card p-3" style="width: 18rem;">
-          <div class="d-flex justify-content-between">
-            <p class="m-0">Items:</p>
-            <p class="m-0">$ {{total_cost}}</p>
+        {% if cart_list_num == 0 %}
+          <div class = "card p-3" style="width: 18rem;">
+            <div class="d-flex justify-content-between">
+              <p class="m-0">Items:</p>
+              <p class="m-0">$ {{total_cost}}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="m-0">Shipping & handeling:</p>
+                <p class="m-0">$ 0</p>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between text-danger mb-3">
+              <h5 class="m-0">Order Total:</h5>
+                <h5 class="m-0">$ 0</h5>
+            </div>
+            <!-- <button class="btn btn-success my-3">
+              <a href="/success/order" class="text-decoration-none text-white">Place your order</a>
+            </button> -->
+            <!-- <p class="text-end"><small>Estimated Delivery Date: -</small></p> -->
           </div>
-          <div class="d-flex justify-content-between">
-            <p class="m-0">Shipping & handeling:</p>
-            <p class="m-0">$ 10</p>
+        {% else %}
+          <div class = "card p-3" style="width: 18rem;">
+            <div class="d-flex justify-content-between">
+              <p class="m-0">Items:</p>
+              <p class="m-0">$ {{total_cost}}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <p class="m-0">Shipping & handeling:</p>
+                <p class="m-0">$ 10</p>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between text-danger mb-3">
+              <h5 class="m-0">Order Total:</h5>
+                <h5 class="m-0">$ {{total_cost + 10}}</h5>
+            </div>
+            <button class="btn btn-success my-3">
+              <a href="/success/order" class="text-decoration-none text-white">Place your order</a>
+            </button>
+            <p class="text-end"><small>Estimated Delivery Date: {{delivery_date}}</small></p>
           </div>
-          <hr>
-          <div class="d-flex justify-content-between text-danger mb-3">
-            <h5 class="m-0">Order Total:</h5>
-            <h5 class="m-0">$ {{total_cost + 10}}</h5>
-          </div>
-          <button class="btn btn-success my-3">
-            <a href="/success/order" class="text-decoration-none text-white">Place your order</a>
-          </button>
-          <p class="text-end"><small>Estimated Delivery Date: {{delivery_date}}</small></p>
-        </div>
+        {% endif %}
       </div>
 
     </div>
