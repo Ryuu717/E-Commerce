@@ -808,7 +808,9 @@ def show_items(ItemID):
                           footer_list=footer_list,
                           cart_list = cart_list,
                           cart_list_num = cart_list_num,
-                          delivery_date = delivery_date)
+                          delivery_date = delivery_date,
+                          another_detail_list = another_detail_list
+                          )
 
 # @app.route("/payment")
 # def payment():
