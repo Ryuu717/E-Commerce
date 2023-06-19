@@ -32,8 +32,11 @@
           </div>
           <br>
           <div class = "card" style="width: 40rem;">            
-            <ul class = "list-unstyled">
-              <li class="text-danger">Another Detail(Need to add more)</li>
+            <ul class = "text-start">
+              <!-- <li class="text-danger">Another Detail(Need to add more)</li> -->
+              {% for line in another_detail_list%}
+                <li class="">{{line}}</li>
+              {% endfor%}
             </ul>            
           </div>
           <br>
