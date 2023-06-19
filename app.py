@@ -715,9 +715,10 @@ def show_items(ItemID):
       
       # 1. item detail
       cur.execute("select * from items where ItemID=?",(ItemID,)) 
-      item_detail= cur.fetchall() 
-      print(item_detail)
-      # print(item_detail[0])
+      item_detail= cur.fetchall()
+
+      another_detail_list = item_detail[0]["Another Detail"].split("|") 
+      
       
       
       # 2. Related Items
