@@ -3,11 +3,12 @@
 
 <!-- Body -->
 <body class="p-0 m-0 border-0 bd-example bg-black">
+
   <!-- Navbar -->
   {% include "nav.html" %}
 
   <!--Carousel-->
-  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="height: 250px">
+  <div id="carouselExampleInterval" class="carousel slide pt-5 mt-5" data-bs-ride="carousel" style="height: 250px">
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">
         <img src="https://m.media-amazon.com/images/I/71tIrZqybrL._SX3000_.jpg" class="d-block w-100" alt="...">
@@ -55,13 +56,17 @@
                 <a href="/show_items/{{recently_viewed_list[0][4]}}">
                   <img src="{{recently_viewed_list[0][11]}}" class="card-img-top img-sm" alt="...">
                 </a>
-                <p>{{recently_viewed_list[0][5]}}</p>
+                <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                  {{recently_viewed_list[0][5]}}
+                </span>
               </div>
               <div class="col img-sm">
                 <a href="/show_items/{{recently_viewed_list[1][4]}}">
                   <img src="{{recently_viewed_list[1][11]}}" class="card-img-top img-sm" alt="...">
                 </a>
-                <p>{{recently_viewed_list[1][5]}}</p>
+                <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                  {{recently_viewed_list[1][5]}}
+                </span>
               </div>
             </div>
             <div class="row">
@@ -69,13 +74,17 @@
                 <a href="/show_items/{{recently_viewed_list[2][4]}}">
                   <img src="{{recently_viewed_list[2][11]}}" class="card-img-top img-sm" alt="...">
                 </a>
-                <p>{{recently_viewed_list[2][5]}}</p>
+                <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                  {{recently_viewed_list[2][5]}}
+                </span>
               </div>
               <div class="col">
                 <a href="/show_items/{{recently_viewed_list[3][4]}}">
                   <img src="{{recently_viewed_list[3][11]}}" class="card-img-top img-sm" alt="...">
                 </a>
-                <p>{{recently_viewed_list[3][5]}}</p>
+                <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                  {{recently_viewed_list[3][5]}}
+                </span>
               </div>
             </div>
             <p><a href="/show_item/recently_viewed_{{current_user_id}}" class="text-decoration-none">see more</a></p>
@@ -90,7 +99,9 @@
           <a href="/show_items/{{recommended_list[0][0]}}">
             <img src="{{recommended_list[0][7]}}" class="card-img-top img-lg" alt="...">
           </a>
-          <p>{{recommended_list[0][1]}}</p>
+          <span class="d-inline-block text-truncate" style="max-width: 120px;">
+            {{recommended_list[0][1]}}
+          </span>
           <p><a href="/show_item/{{recommended_list[0][2]}}" class="text-decoration-none">see more</a></p>
         </div>
       </div>
@@ -119,7 +130,9 @@
                 <a href="/show_items/{{order_list[0][4]}}">
                   <img src="{{order_list[0][11]}}" class="card-img-top img-sm" alt="...">
                 </a>  
-                <p>{{order_list[0][5]}}</p>
+                <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                  {{order_list[0][5]}}
+                </span>
               </div>
               <div class="col img-sm">
                 <a href="/show_items/{{order_list[1][4]}}">
@@ -158,13 +171,17 @@
               <a href="/show_items/{{deal_list[0][0]}}">
                 <img src="{{deal_list[0][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{deal_list[0][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{deal_list[0][1]}}
+              </span>
             </div>
             <div class="col img-sm">
               <a href="/show_items/{{deal_list[1][0]}}">
                 <img src="{{deal_list[1][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{deal_list[1][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{deal_list[1][1]}}
+              </span>
             </div>
           </div>
           <div class="row">
@@ -172,13 +189,17 @@
               <a href="/show_items/{{deal_list[2][0]}}">
                 <img src="{{deal_list[2][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{deal_list[2][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{deal_list[2][1]}}
+              </span>
             </div>
             <div class="col">
               <a href="/show_items/{{deal_list[3][0]}}">
                 <img src="{{deal_list[3][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{deal_list[3][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{deal_list[3][1]}}
+              </span>
             </div>
           </div>
           <p><a href="/show_item/tag={{deal_list[0][8]}}" class="text-decoration-none">see more</a></p>
@@ -198,13 +219,17 @@
               <a href="/show_items/{{popular_list[0][0]}}">
                 <img src="{{popular_list[0][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{popular_list[0][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{popular_list[0][1]}}
+              </span>
             </div>
             <div class="col img-sm">
               <a href="/show_items/{{popular_list[1][0]}}">
                 <img src="{{popular_list[1][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{popular_list[1][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{popular_list[1][1]}}
+              </span>
             </div>
           </div>
           <div class="row">
@@ -212,13 +237,17 @@
               <a href="/show_items/{{popular_list[2][0]}}">
                 <img src="{{popular_list[2][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{popular_list[2][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{popular_list[2][1]}}
+              </span>
             </div>
             <div class="col">
               <a href="/show_items/{{popular_list[3][0]}}">
                 <img src="{{popular_list[3][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{popular_list[3][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{popular_list[3][1]}}
+              </span>
             </div>
           </div>
           <!-- <p><a href="/show_item/tag={{popular_list[0][8]}}" class="text-decoration-none">see more</a></p> -->
@@ -235,13 +264,17 @@
               <a href="/show_items/{{pickup_list[0][0]}}">
                 <img src="{{pickup_list[0][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{pickup_list[0][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{pickup_list[0][1]}}
+              </span>
             </div>
             <div class="col img-sm">
               <a href="/show_items/{{pickup_list[1][0]}}">
                 <img src="{{pickup_list[1][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{pickup_list[1][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{pickup_list[1][1]}}
+              </span>
             </div>
           </div>
           <div class="row">
@@ -249,13 +282,17 @@
               <a href="/show_items/{{pickup_list[2][0]}}">
                 <img src="{{pickup_list[2][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{pickup_list[2][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{pickup_list[2][1]}}
+              </span>
             </div>
             <div class="col">
               <a href="/show_items/{{pickup_list[3][0]}}">
                 <img src="{{pickup_list[3][7]}}" class="card-img-top img-sm" alt="...">
               </a>
-              <p>{{pickup_list[3][1]}}</p>
+              <span class="d-inline-block text-truncate" style="max-width: 120px;">
+                {{pickup_list[3][1]}}
+              </span>
             </div>
           </div>
           <p><a href="/show_item/tag={{pickup_list[0][8]}}" class="text-decoration-none">see more</a></p>

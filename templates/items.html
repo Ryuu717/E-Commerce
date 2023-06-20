@@ -6,7 +6,7 @@
   {% include "nav.html" %}
 
     <!--Item details and description -->
-    <div class="container text-center mt-5">
+    <div class="container text-center mt-10">
       <div class="row">
         <div class="col">
           <h3 class="mb-3">{{item_detail[0]["ItemName"]}}</h3>
@@ -33,7 +33,6 @@
           <br>
           <div class = "card" style="width: 40rem;">            
             <ul class = "text-start">
-              <!-- <li class="text-danger">Another Detail(Need to add more)</li> -->
               {% for line in another_detail_list%}
                 <li class="">{{line}}</li>
               {% endfor%}
@@ -122,8 +121,7 @@
       <div class="card">
         <h5 class="card-title p-3 text-start">Customers also search</h5>
         <div id="carousel-customers-search " class="carousel">
-          <div class="carousel-inner-customers-search ">
-
+          <div class="carousel-inner-customers-search">
             {% for item in searched_items %}
             <div class="carousel-item-customers-search">
               <div class="image-wrapper">
@@ -144,11 +142,11 @@
             {% endfor %}
 
           </div>
-          <button class="carousel-control-customers-search-prev" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="prev">
+          <button class="carousel-control-customers-search-prev" type="button" data-bs-target="#carousel-customers-search" data-bs-slide="prev">
             <span class="carousel-control-customers-search-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-customers-search-next" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="next">
+          <button class="carousel-control-customers-search-next" type="button" data-bs-target="#carousel-customers-search" data-bs-slide="next">
             <span class="carousel-control-customers-search-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>

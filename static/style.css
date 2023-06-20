@@ -176,4 +176,30 @@ Black: %23000 */
     white-space: pre-wrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+.fixed-top-1 {
+    position: fixed !important;
+}
+
+.fixed-top-2 {
+    position: fixed !important;
+    top: 60px;
+}
+
+.mt-10{
+    margin-top: 10rem;
+}
+
+.z-index-10  {
+    z-index: 10 !important;
   }
+
+.z-index-20  {
+    z-index: 20 !important;
+}
+
+.z-index-30  {
+    z-index: 30 !important;
+}
