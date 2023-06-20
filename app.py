@@ -1056,28 +1056,29 @@ def show_account(UserID):
                           footer_list=footer_list)
 
 
+
 @app.route('/signin_user', methods=['GET', 'POST'])
 def signin_user():
-   Email = request.form['Email']
+   entered_email = request.form['Email']
+   entered_password = request.form['Password']
    
    with sql.connect(DB_path) as con:
       cur = con.cursor()
-      cur.execute("select * from users where Email=?",(Email,)) 
-      # user_info= cur.fetchall()
+      cur.execute("select * from users where Email=?",(entered_email,)) 
       registered_user= cur.fetchone(); 
       
+      registered_password = registered_user[9]
+      
       if registered_user:
-         # msg ="Sign in successfully"
+         if entered_password == registered_password:
+            registered_user = load_user(registered_user[0])
+            login_user(registered_user)
+            return redirect(url_for('success', request="signin"))
          
-         registered_user = load_user(registered_user[0])
-         login_user(registered_user)
-         # flash('You were successfully logged in')
-         # return redirect(url_for('main'))
-         return redirect(url_for('success', request="signin"))
-         
-         
+         else:
+            flash('Your password is wrong')
+            return redirect(url_for('signin')) 
       else:
-         # msg="Your email is not registered."
          flash('Your email is not registered')
          return redirect(url_for('signin')) 
          # con.rollback()
