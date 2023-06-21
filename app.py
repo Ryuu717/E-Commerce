@@ -5,7 +5,7 @@ from flask_login import UserMixin, LoginManager, login_user, logout_user, login_
 import pandas as pd
 from datetime import date, timedelta
 from shuffle import shuffle_table
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = 'random string'
@@ -998,8 +998,13 @@ def add_account():
             flash("Please sign in instead")
             return render_template('register.html', form = form)
          
-      except:      
-         cur.execute("INSERT INTO users (FirstName, LastName, Phone, Email) VALUES (?,?,?,?)",(form.first_name.data, form.last_name.data, form.phone.data, form.email.data))
+      except:    
+         hashed_salted_password = generate_password_hash(
+            form.password.data,
+            method='pbkdf2:sha256',
+            salt_length=8
+         )    
+         cur.execute("INSERT INTO users (FirstName, LastName, Phone, Email, Password) VALUES (?,?,?,?,?)",(form.first_name.data, form.last_name.data, form.phone.data, form.email.data, hashed_salted_password))
          con.commit()
          cur.execute("select * from users where Email=?",(form.email.data,)) 
          new_user= cur.fetchone(); 
@@ -1070,7 +1075,8 @@ def signin_user():
       registered_password = registered_user[9]
       
       if registered_user:
-         if entered_password == registered_password:
+         # if entered_password == registered_password:
+         if check_password_hash(registered_password, entered_password):
             registered_user = load_user(registered_user[0])
             login_user(registered_user)
             return redirect(url_for('success', request="signin"))
