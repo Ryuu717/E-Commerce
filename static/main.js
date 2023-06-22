@@ -56,3 +56,10 @@ $('.carousel-control-for-you-prev').on('click', function(){
 $(window).on('load', function() {
     $('#myModal').modal('show')
 });
+
+//Pop up message 
+
+//function alertMessage() {
+//    $('popup').alert("Alert message");
+//  }
+

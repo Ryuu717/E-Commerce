@@ -717,7 +717,7 @@ def show_items(ItemID):
       cur.execute("select * from items where ItemID=?",(ItemID,)) 
       item_detail= cur.fetchall()
 
-      another_detail_list = item_detail[0]["Another Detail"].split("|") 
+      another_detail_list = item_detail[0]["AnotherDetail"].split("|") 
       
       
       
@@ -1435,6 +1435,71 @@ def orders_user(UserID):
                         #   total_cost = total_cost,
                         #   user_list = user_list,
                         #   delivery_date = delivery_date
+                          )
+
+# @app.route('/search')  # 'GET' is the default method, you don't need to mention it explicitly
+# def search():
+
+#    # query = request.args['search']
+#    query = request.GET.get('search')  # try this instead
+
+#    with sql.connect(DB_path) as con:
+#       con.row_factory = sql.Row 
+#       cur = con.cursor() 
+
+#       # 1. Categories
+#       cur.execute("select * from items where 'category' LIKE '%electric device%' ")
+#       category_list= cur.fetchall()
+
+#       #req_search = Storage.query.filter_by(req_no=query)
+#       return render_template('item.html', req_search=req_search)
+   
+@app.route('/search', methods = ['POST']) 
+def search():
+
+   search_name = request.form["search"] 
+   
+   with sql.connect(DB_path) as con:
+      con.row_factory = sql.Row 
+      cur = con.cursor() 
+      
+      # 1. item
+      #cur.execute(f"select * from items where Category LIKE '%{search_name}%' ") 
+      #cur.execute(f"select * from Detail, Category, ItemName, AnotherDetail from items where detail Like '%abcd%' and category Like '%abcd%' and itemname Like '%abcd%' and AnotherDetail Like '%abcd%'")
+      cur.execute(f"select * from items where Category LIKE '%{search_name}%'or Detail LIKE '%{search_name}%' or ItemName LIKE '%{search_name}%' or AnotherDetail LIKE '%{search_name}%' ")
+      item_list= cur.fetchall() 
+      if item_list == []:
+          flash('No such keyword or item!')
+          return redirect(url_for("main"))
+          
+      
+      # 2. Categories
+      cur.execute("select * from categories")
+      category_list= cur.fetchall()
+      
+      # 3. Footer
+      cur.execute("select * from footers")
+      footer_list= cur.fetchall(); 
+      
+      # 4. Cart 
+      cur.execute("select * from carts where UserID = ?",(str(current_user.get_id()),))
+      cart_list= cur.fetchall(); 
+      cart_list_num = 0
+      for item in cart_list:
+         cart_list_num += item[12]
+      
+      # 4. User ID 
+      current_user_id = str(current_user.get_id())
+      # print(f"currnet User ID: {current_user_id}")
+      
+   return render_template("item.html", 
+                          item_list = item_list,
+                          category_list = category_list,
+                          footer_list=footer_list,
+                          cart_list = cart_list,
+                          cart_list_num = cart_list_num,
+                          current_user_id = current_user_id,
+                          data_source = "items"
                           )
 
 

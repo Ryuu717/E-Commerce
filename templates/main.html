@@ -10,6 +10,18 @@
   <!--Carousel-->
   <div id="carouselExampleInterval" class="carousel slide pt-5 mt-5" data-bs-ride="carousel" style="height: 250px">
     <div class="carousel-inner">
+
+      <!--Alert-->
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}  
+                  {% for message in messages %}
+                      <div class="alert alert-danger mb-0 mt-3" role="alert">
+                        {{ message }}
+                      </div>                      
+                  {% endfor %}               
+          {% endif %} 
+      {% endwith %}
+      
       <div class="carousel-item active" data-bs-interval="10000">
         <img src="https://m.media-amazon.com/images/I/71tIrZqybrL._SX3000_.jpg" class="d-block w-100" alt="...">
       </div>
@@ -29,6 +41,9 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  
+  <!--Pop up message-->
+  <!--<div id ="popup"></div>-->
 
   <!--Items-->
   <div class="container text-center pb-5 border-bottom">  
