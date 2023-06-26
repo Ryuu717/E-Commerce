@@ -719,8 +719,6 @@ def show_items(ItemID):
 
       another_detail_list = item_detail[0]["AnotherDetail"].split("|") 
       
-      
-      
       # 2. Related Items
       cur.execute("select * from items where Category=?",(item_detail[0]["Category"],)) 
       # cur.execute("select * from items where Category=?",("Electric devices",))
@@ -795,6 +793,27 @@ def show_items(ItemID):
          UserName = current_user.FirstName
       else:
          UserName = "Guest"
+         
+         
+      # 10. Reviews
+      cur.execute("select * from orders where ItemID = ?",(ItemID,))
+      review_list= cur.fetchall(); 
+      
+      
+      df = pd.DataFrame(review_list)
+      df.columns = ["OrderID", "Date", "UserID", "UserName", "ItemID", "ItemName", "Category", "Price", "Detail","Rating", "Reviews", "ImageURL", "ItemCount", "ReviewTitle"]
+      review_count = len(df["Rating"])
+      rating_count_list = []
+      for i in range(5):
+         rating_count_list.append(len(df[df["Rating"] == i+1]))
+      
+      rating_ratio_list = []
+      for i in range(5):
+         rating_ratio = round(rating_count_list[i]/review_count * 100 , 1)
+         rating_ratio_list.append(rating_ratio)
+      
+      rating_ave = df["Rating"].mean()
+      
    
       cur.execute("INSERT INTO logs (Date, UserID, UserName, ItemID, ItemName, Category, Price, Detail, Rating, Reviews, ImageURL) VALUES (?,?,?,?,?,?,?,?,?,?,?)",(Date, UserID, UserName, ItemID, ItemName, Category, Price, Detail, Rating, Reviews, ImageURL))
       
@@ -809,7 +828,10 @@ def show_items(ItemID):
                           cart_list = cart_list,
                           cart_list_num = cart_list_num,
                           delivery_date = delivery_date,
-                          another_detail_list = another_detail_list
+                          another_detail_list = another_detail_list,
+                          review_list = review_list,
+                          rating_ratio_list = rating_ratio_list,
+                          rating_ave = rating_ave
                           )
 
 # @app.route("/payment")
@@ -1044,7 +1066,7 @@ def show_account(UserID):
       order_list= cur.fetchall()
       
       # 4. Wishes
-      cur.execute("select * from items where Wishers=?",(UserID,)) 
+      cur.execute("select * from wishes where UserID=?",(UserID,)) 
       wisher_list= cur.fetchall(); 
       
       # 5. Footer
@@ -1348,7 +1370,7 @@ def success(request):
       title = "Sign in successfully"
       detail = "Welcome to " + current_user.FirstName + " " + current_user.LastName
       
-   elif request == "add_cart":
+   elif request == "add_cart" or request == "add_wishes":
       title = "Added item successfully"
       detail = "Keep enjoy your shopping!"
       
@@ -1359,6 +1381,7 @@ def success(request):
    elif request == "add_account":
       title = "Registered successfully"
       detail = "Welcome to " + current_user.FirstName + " " + current_user.LastName
+   
       
    return render_template("success.html", title=title, detail=detail) 
 
@@ -1382,7 +1405,6 @@ def success(request):
 #                    )
 
 @app.route("/orders/<string:UserID>", methods=['GET', 'POST'])
-# @app.route("/orders/<string:UserID>/<int:UserOrderCount>", methods=['GET', 'POST'])
 def orders_user(UserID):
       
    with sql.connect(DB_path) as con:
@@ -1501,6 +1523,32 @@ def search():
                           current_user_id = current_user_id,
                           data_source = "items"
                           )
+
+
+@app.route('/show_items/add_wishlist/<string:ItemID>', methods=['POST'])
+def add_wishlist(ItemID): 
+   
+   # # 0. User ID 
+   current_user_id = str(current_user.get_id())
+   
+   # 1. Items
+   with sql.connect(DB_path) as con:
+      con.row_factory = sql.Row 
+      cur = con.cursor() 
+      
+      item_list = cur.execute("select * from items where ItemID = ?",(ItemID,))
+      
+      for item in item_list:
+         UserID = current_user_id
+         ItemID = item[0]
+         ItemName = item[1]
+         ItemName = item[1]
+         ImageURL = item[7]
+      
+      cur.execute("INSERT INTO wishes (UserID, ItemID, ItemName, ImageURL) VALUES (?,?,?,?)",(UserID,ItemID, ItemName, ImageURL))
+      con.commit()   
+      
+   return redirect(url_for('success', request= "add_wishes"))
 
 
 if __name__ == '__main__':

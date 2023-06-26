@@ -170,21 +170,30 @@
         </div>
       </li>
       <!--Wish list-->
-      <li class="my-5">
+      <li class="mt-4">
         <h4>4. Wish list</h3>
         <div class="row mx-1 mb-3">
           <div id="carousel-wish-list" class="carousel">
             <div class="carousel-inner-wish-list">
-              {% for item in wisher_list%}
-              <div class="carousel-item-wish-list">
-                <div class="image-wrapper">
-                  <img src="{{item[7]}}" alt="..." class="img-sm">
+              {% if wisher_list %}
+                {% for item in wisher_list%}
+                <div class="carousel-item-wish-list">
+                  <div class="image-wrapper">
+                    <a href="/items/{{item[4]}}">
+                      <img src="{{item[10]}}" class="card-img-top img-sm" alt="...">
+                    </a>
+                  </div>
+                  <div class="text-center">
+                    <p class="d-inline-block text-truncate" style="max-width: 120px;">
+                      {{item[5]}}
+                    </p>
+                  </div>
                 </div>
-                <p class="text-center">{{item[1]}}</p>
-              </div>
-              {% endfor %}
+                {% endfor %}
+              {% else %}
+                <div class="m-5"></div>
+              {% endif %}
 
-  
             </div>
             <button class="carousel-control-wish-list-prev" type="button" data-bs-target="#carousel-wish-list" data-bs-slide="prev">
               <span class="carousel-control-wish-list-prev-icon" aria-hidden="true"></span>
