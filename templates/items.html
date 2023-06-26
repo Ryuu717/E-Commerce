@@ -83,7 +83,7 @@
             {% endif %}
 
           </div>
-          <form class="text-end px-2" action="/", method="post">
+          <form class="text-end px-2" action="add_wishlist/{{item_detail[0][0]}}", method="post">
             <button type="submit" class="btn btn-link"><i class="fa-solid fa-circle-plus"></i> Add to Wish list</button>
           </form>
         </div>
@@ -205,19 +205,23 @@
       
         <!--Comments-->
         <div class="col-7">
+          {% if review_list %}
+            {% for review in review_list %}
             <div class="card mb-3 text-start" style="max-width: 1000px;">
               <div class="row g-0 p-4">
-                <p><i class="fa-solid fa-user fa-xl"></i><span class="px-3">title</span></p>
+                <p><i class="fa-solid fa-user fa-xl"></i><span class="px-3">{{review[3]}}</span></p>
                 <p class="text-body-secondary">
-                  {% for n in range(5) %}
+                  {% for n in range(review[9]) %}
                   <i class="fa-solid fa-star" style="color: #ffd500;"></i>
                   {% endfor%}
-                  <span>3</span>
+                  <span>{{review[13]}}</span>
                 </p>
-                <p>--------</p>
+                <p>{{review[10]}}</p>
               </div>
             </div>
-
+            {% endfor %}
+          {% endif %}
+          
         </div>
       </div>
     </div>
