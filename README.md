@@ -12,7 +12,7 @@
     - First Name:	John
     - Last Name:	Wick
     - Email:	john@gmail.com
-    - Password:	   daisy08
+    - Password:	 daisy08
 
 
 # Session time:	
