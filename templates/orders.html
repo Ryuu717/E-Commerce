@@ -11,7 +11,7 @@
       <div class="col">
         <h3 >Your orders</h3>
         <div class="card p-3 mb-3" style="width: 60rem;">
-          {% if current_user_id == "None" %}
+          {% if current_user_id == "None" or order_list == [] %}
             <!-- <h3 >No order history</h3> -->
             <div class="card-body mb-5 pb-5">
               <h4>No order history</h4>
@@ -26,19 +26,19 @@
                   </div>
                   <div class="col-8">
                     <div class="card-body my-0 py-2">
-                      <h5 class="card-title">{{item["ItemName"]}}</h5>
+                      <h5 class="card-title">{{item[5]}}</h5>
                       <ul class="list-unstyled">
-                        <li><p class="card-text">{{item["Date"]}}</p></li>
+                        <li><p class="card-text">{{item[1]}}</p></li>
                         <li>
                           <p class="mb-0">Rating
-                            {{item["Rating"]}}
-                              {% for n in range(item["Rating"]) %}
+                            {{item[9]}}
+                              {% for n in range(item[9]) %}
                               <span><i class="fa-solid fa-star" style="color: #ffd500;"></i></span>
                               {% endfor%}
                           </p>
                         </li>
-                        <li><p class="mb-0">Item Count: {{item["ItemCount"]}}</p></li>
-                        <li><p class="card-text">Unit cost: {{item["Price"]}}(NZD)</p></li>
+                        <li><p class="mb-0">Item Count: {{item[12]}}</p></li>
+                        <li><p class="card-text">Unit cost: {{item[7]}}(NZD)</p></li>
                       </ul>
                       
                     </div>

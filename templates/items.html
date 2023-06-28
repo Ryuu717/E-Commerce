@@ -9,29 +9,26 @@
     <div class="container text-center mt-10">
       <div class="row">
         <div class="col">
-          <h3 class="mb-3">{{item_detail[0]["ItemName"]}}</h3>
-          <img class="img-lg" src="{{item_detail[0]['ImageURL']}}" alt="...">
+          <h3 class="mb-3">{{item_detail[0][1]}}</h3>
+          <img class="img-lg" src="{{item_detail[0][7]}}" alt="...">
         </div>
                 
         <div class="col-6">
           <h4 class="text-center">Item Detail</h4>
           <div class = "card text-start p-3" style="width: 40rem;">
             <ul class = "list-unstyled">
-              <li class="py-1">{{item_detail[0]['Detail']}}</li>
+              <li class="py-1">{{item_detail[0][4]}}</li>
               <li class="py-1">
-                {{item_detail[0]['Rating']}}
-                {% for n in range(item_detail[0]['Rating']) %}
+                {{item_detail[0][5]}}
+                {% for n in range(item_detail[0][5]) %}
                 <i class="fa-solid fa-star" style="color: #ffd500;"></i>
                 {% endfor%}
               </li>
-              <li class="py-1">$ {{item_detail[0]['Price']}}</li>
-              <!-- <li class="">Color: Midnight</li>
-              <li class="">Service Provided: Unlocked</li>
-              <li class="">Size: 256GB</li> -->
+              <li class="py-1">$ {{item_detail[0][4]}}</li>
             </ul>            
           </div>
           <br>
-          <div class = "card" style="width: 40rem;">            
+          <div class = "card p-3" style="width: 40rem;">            
             <ul class = "text-start">
               {% for line in another_detail_list%}
                 <li class="">{{line}}</li>
@@ -41,17 +38,14 @@
           <br>
         </div>
 
+        <!-- Payment -->
         <div class = "col">
           <h4 class="text-center">Payment</h4>
           <div class = "card p-2" style="width: 18rem;">
             <div class="d-flex justify-content-between p-2">
               <p class="m-0">Price:</p>
-              <p class="m-0">$ {{item_detail[0]['Price']}}</p>
+              <p class="m-0">$ {{item_detail[0][3]}}</p>
             </div>
-            <!-- <div class="d-flex justify-content-between">
-              <p class="m-0">Shipping & handeling:</p>
-              <p class="m-0">$ 10</p>
-            </div> -->
             <ul class="list-unstyled text-danger my-3">
               <li>Estimated Delivery Date:</li>
               <li>{{delivery_date}}</li>
@@ -80,31 +74,37 @@
                   <button type="submit" class="btn btn-success" formaction="/pay_now/{{item_detail[0][0]}}" name = "go_payment" value="go_payment">Pay Now</button>
                 </a>
               </form>
-            {% endif %}
-
+              {% endif %}
+           
           </div>
-          <form class="text-end px-2" action="add_wishlist/{{item_detail[0][0]}}", method="post">
+          {% if current_user_id != 'None' %}
+          <form class="text-end px-2" action="/add_wishlist/{{item_detail[0][0]}}", method="post">
             <button type="submit" class="btn btn-link"><i class="fa-solid fa-circle-plus"></i> Add to Wish list</button>
           </form>
+          {% endif %}
         </div>
       </div>
     </div>
 
-    <!-- Row-3-->
+    <!-- Products related to this item　-->
     <div class="row mx-1 my-3">
       <div class="card">
         <h5 class="card-title p-3 text-start">Products related to this item</h5>
         <div id="carousel-related-items" class="carousel">
           <div class="carousel-inner-related-items">
             {% for item in related_items %}
-            <div class="carousel-item-related-items">
-              <div class="image-wrapper">
-                <a href="/show_items/{{item[0]}}">
-                  <img src="{{item[7]}}" alt="..." class="img-sm">
-                </a>
+              <div class="carousel-item-related-items">
+                <div class="image-wrapper">
+                  <a href="/items/{{item[0]}}">
+                    <img src="{{item[7]}}" alt="..." class="img-sm">
+                  </a>
+                </div>
+                <div class="text-center">
+                  <p class="d-inline-block text-truncate" style="max-width: 120px;">
+                    {{item[1]}}
+                  </p>
+                </div>
               </div>
-              <p class="text-center">{{item[1]}}</p>
-            </div>
             {% endfor %}
           </div>
           <button class="carousel-control-related-items-prev" type="button" data-bs-target="#carousel-related-items" data-bs-slide="prev">
@@ -119,37 +119,45 @@
       </div>
     </div>
 
-    <!-- Row-4-->
+    <!-- Customers also search　-->
     <div class="row mx-1 mb-3">
       <div class="card">
         <h5 class="card-title p-3 text-start">Customers also search</h5>
         <div id="carousel-customers-search " class="carousel">
-          <div class="carousel-inner-customers-search">
+          <div class="carousel-inner-customers-search ">
             {% for item in searched_items %}
-            <div class="carousel-item-customers-search">
-              <div class="image-wrapper">
-                <a href="/show_items/{{item[0]}}">
-                  <img src="{{item[7]}}" alt="..." class="img-sm">
-                </a>
+              <div class="carousel-item-customers-search">
+                <div class="image-wrapper">
+                  <a href="/items/{{item[0]}}">
+                    <img src="{{item[7]}}" alt="..." class="img-sm">
+                  </a>
+                </div>
+                <div class="text-center">
+                  <p class="d-inline-block text-truncate" style="max-width: 120px;">
+                    {{item[1]}}
+                  </p>
+                </div>
+                <div class="card-body text-center">
+                  <p class="card-text"><small class="text-body-secondary">{{item[4]}}</small></p>
+                  {{item["Rating"]}}
+                  {% for n in range(item[5]) %}
+                    <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                  {% endfor%}
+                  <div class="text-center">
+                    <p class="d-inline-block text-truncate" style="max-width: 120px;">
+                      {{item[3]}}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <p class="text-center">{{item[1]}}</p>
-              <div class="card-body text-center">
-                <p class="card-text"><small class="text-body-secondary">{{item[4]}}</small></p>
-                {{item["Rating"]}}
-                {% for n in range(item[5]) %}
-                  <i class="fa-solid fa-star" style="color: #ffd500;"></i>
-                {% endfor%}
-                <p class="card-text mt-2">$ {{item[3]}}</p>
-              </div>
-            </div>
             {% endfor %}
 
           </div>
-          <button class="carousel-control-customers-search-prev" type="button" data-bs-target="#carousel-customers-search" data-bs-slide="prev">
+          <button class="carousel-control-customers-search-prev" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="prev">
             <span class="carousel-control-customers-search-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-customers-search-next" type="button" data-bs-target="#carousel-customers-search" data-bs-slide="next">
+          <button class="carousel-control-customers-search-next" type="button" data-bs-target="#carousel-customers-search " data-bs-slide="next">
             <span class="carousel-control-customers-search-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -168,37 +176,37 @@
             <li class="d-flex justify-content-between">
               <p class="px-2">5 Star</p>
               <div class="col progress mt-1">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-warning" role="progressbar" {% if rating_ratio_list %} style="width: {{rating_ratio_list[4]}}% ;" {% endif %}  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <small class="px-2">10 %</small>
+              <small class="px-2">{{rating_ratio_list[4]}} %</small>
             </li>
             <li class="d-flex justify-content-between">
               <p class="px-2">4 Star</p>
               <div class="col progress mt-1">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-warning" role="progressbar" {% if rating_ratio_list %} style="width: {{rating_ratio_list[3]}}% ;" {% endif %}  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <small class="px-2">10 %</small>
+              <small class="px-2">{{rating_ratio_list[3]}} %</small>
             </li>
             <li class="d-flex justify-content-between">
               <p class="px-2">3 Star</p>
               <div class="col progress mt-1">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-warning" role="progressbar" {% if rating_ratio_list %} style="width: {{rating_ratio_list[2]}}% ;" {% endif %}  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <small class="px-2">10 %</small>
+              <small class="px-2">{{rating_ratio_list[2]}} %</small>
             </li>
             <li class="d-flex justify-content-between">
               <p class="px-2">2 Star</p>
               <div class="col progress mt-1">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-warning" role="progressbar" {% if rating_ratio_list %} style="width: {{rating_ratio_list[1]}}% ;" {% endif %}  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <small class="px-2">10 %</small>
+              <small class="px-2">{{rating_ratio_list[1]}} %</small>
             </li>
             <li class="d-flex justify-content-between">
               <p class="px-2">1 Star</p>
               <div class="col progress mt-1">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 25%;"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar bg-warning" role="progressbar" {% if rating_ratio_list %} style="width: {{rating_ratio_list[0]}}% ;" {% endif %}  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <small class="px-2">10 %</small>
+              <small class="px-2">{{rating_ratio_list[0]}} %</small>
             </li>
           </ul>
         </div>
@@ -225,14 +233,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
 
     <!--Footer-->
     {% include "footer.html" %}

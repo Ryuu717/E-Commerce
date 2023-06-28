@@ -1,0 +1,8 @@
+Flask==2.3.2
+Flask==2.2.2
+Flask_Login==0.6.2
+Flask_WTF==1.1.1
+pandas==1.5.3
+Werkzeug==2.2.3
+Werkzeug==2.3.4
+WTForms==2.3.3

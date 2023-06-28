@@ -1,13 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // Carousel
 ////////////////////////////////////////////////////////////////////////////////////
-// const multipleItemCarousel = document.querySelector('#carousel-top-categories'); 
-// const carousel = new bootstrap.Carousel(multipleItemCarousel, {
-//     interval: false
-// })
-
 var scrollPosition = 0; 
-
 
 // Top Categories
 var carouselWidthTopCategories = $('.carousel-inner-top-categories')[0].scrollWidth; 
@@ -47,19 +41,3 @@ $('.carousel-control-for-you-prev').on('click', function(){
         $('.carousel-inner-for-you').animate({scrollLeft: scrollPosition},600); 
     } 
 }); 
-
-
-////////////////////////////////////////////////////////////////////////////////////
-// Modal
-////////////////////////////////////////////////////////////////////////////////////
-
-$(window).on('load', function() {
-    $('#myModal').modal('show')
-});
-
-//Pop up message 
-
-//function alertMessage() {
-//    $('popup').alert("Alert message");
-//  }
-
