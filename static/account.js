@@ -1,12 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // Carousel
 ////////////////////////////////////////////////////////////////////////////////////
-// const multipleItemCarousel = document.querySelector('#carousel'); 
-// const carousel = new bootstrap.Carousel(multipleItemCarousel, {
-//     interval: false
-// })
-
 var scrollPosition = 0; 
+
 
 // Order History
 var carouselWidthOrderHistory = $('.carousel-inner-order-history')[0].scrollWidth; 

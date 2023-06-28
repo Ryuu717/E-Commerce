@@ -4,20 +4,23 @@
 <body class="p-0 m-0 border-0 bd-example">
    <!-- Navbar -->
   {% include "nav.html" %}
-    
-  <!--Item details and description -->
-  <div class="container text-start mt-10">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %} 
-        <ul class='list-unstyled mesage'> 
+
+  <!-- Alert -->
+  <div class="pt-5 mt-5">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %} 
             {% for message in messages %} 
-                <li class="text-center text-danger"><h2>{{ message }}</h2></li> 
+                <div class="alert alert-danger mb-0 mt-2 z-index-10" role="alert">
+                  {{ message }}
+                </div> 
             {% endfor %} 
-        </ul> 
-    {% endif %} 
-    {% endwith %}
+        {% endif %} 
+      {% endwith %}
+  </div>
 
 
+  <!--Item details and description -->
+  <div class="container text-start pt-3 mt-5">
     <div class="row">
         <div class="col-9"> 
           {% if current_user_id == "None" %}
@@ -33,11 +36,11 @@
             <div class="row">
               <div class="col-11">
                 <ul class = "list-unstyled">
-                  <li class="">Name: {{user_list[1]}} {{user_list[2]}}</li>
-                  {% if user_list[3] %}
-                  <li class="">Address: <span>{{user_list[3]}}</span></li>
+                  <li class="">Name: {{user_list[0][1]}} {{user_list[0][2]}}</li>
+                  {% if user_list[0][3] %}
+                    <li class="">Address: <span>{{user_list[0][3]}}</span></li>
                   {% else %}
-                  <li class="">Address: <span class="text-danger">{{user_list[3]}}</span></li>
+                    <li class="">Address: <span class="text-danger"> None</span></li>
                   {% endif %}
                 </ul>            
               </div>
@@ -56,14 +59,14 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form class="" action="/update_payment", method="post">
+                      <form class="" action="/update_payment_info", method="post">
 
                           {{ registered_form.hidden_tag() }} 
                 
                           <div class="form-row">
                             <div class="form-group col-md-10 mb-2">
                               {{ registered_form.first_name.label }} <br> 
-                              {{ registered_form.first_name(value=account_list[0]["FirstName"])}} <br> 
+                              {{ registered_form.first_name(value=user_list[0][1])}} <br> 
                               <!-- Error Message -->
                               {% for message in registered_form.first_name.errors %} 
                                 <div class="text-danger">{{message}}</div> 
@@ -72,7 +75,7 @@
                     
                             <div class="form-group col-md-10 mb-2">
                               {{ registered_form.last_name.label }} <br> 
-                              {{ registered_form.last_name(value=account_list[0]["LastName"])}} <br> 
+                              {{ registered_form.last_name(value=user_list[0][2])}} <br> 
                               <!-- Error Message -->
                               {% for message in registered_form.last_name.errors %} 
                                 <div class="text-danger">{{message}}</div> 
@@ -81,7 +84,7 @@
                 
                             <div class="form-group col-md-10 mb-2">
                               {{ registered_form.address.label }} <br> 
-                              {{ registered_form.address(value=account_list[0]["Address"])}} <br> 
+                              {{ registered_form.address(value=user_list[0][3])}} <br> 
                               <!-- Error Message -->
                               {% for message in registered_form.address.errors %} 
                                 <div class="text-danger">{{message}}</div> 
@@ -90,7 +93,7 @@
                     
                             <div class="form-group col-md-10 mb-2">
                               {{ registered_form.phone.label }} <br> 
-                              {{ registered_form.phone(value=account_list[0]["Phone"])}} <br> 
+                              {{ registered_form.phone(value=user_list[0][4])}} <br> 
                               <!-- Error Message -->
                               {% for message in registered_form.phone.errors %} 
                                 <div class="text-danger">{{message}}</div> 
@@ -99,7 +102,7 @@
                     
                             <div class="form-group col-md-10 mb-2">
                               {{ registered_form.email.label }} <br> 
-                              {{ registered_form.email(value=account_list[0]["Email"])}} <br> 
+                              {{ registered_form.email(value=user_list[0][5])}} <br> 
                               <!-- Error Message -->
                               {% for message in registered_form.email.errors %} 
                                 <div class="text-danger">{{message}}</div> 
@@ -108,7 +111,7 @@
                 
                             <div class="form-group col-md-10 mb-2">
                               {{ registered_form.card_number.label }} <br> 
-                              {{ registered_form.card_number(value=account_list[0]["CardNumber"])}} <br> 
+                              {{ registered_form.card_number(value=user_list[0][6])}} <br> 
                               <!-- Error Message -->
                               {% for message in registered_form.card_number.errors %} 
                                 <div class="text-danger">{{message}}</div> 
@@ -117,7 +120,6 @@
                     
                             </div>
                         </div>
-                        <!-- <input type="submit" name="Go Back to home" class="btn btn-success col-md-12 my-3"/> -->
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="submit" class="btn btn-success">Save changes</button>
@@ -136,22 +138,16 @@
               <div class="col-11">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                  {% if user_list["CardNumber"] %}
+                  {% if user_list[0][6] %}
                   <label class="form-check-label" for="flexRadioDefault1">
-                    Visa: {{user_list["CardNumber"]}}
+                    Visa: **** - **** - {{card_num}}
                   </label>
                   {% else %}
                   <label class="form-check-label" for="flexRadioDefault1">
-                    Visa: <span class="text-danger">{{user_list["CardNumber"]}}</span>
+                    Visa: <span class="text-danger"> None</span>
                   </label>
                   {% endif %}
                 </div>
-                <!-- <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Visa: ****-****-2222 (Need to show last 4 digits)
-                  </label>
-                </div> -->
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                   <label class="form-check-label" for="flexRadioDefault2">
@@ -178,8 +174,8 @@
                   </div>
                   <div class="col-8">
                     <div class="card-body my-0 py-2">
-                      <h5 class="card-title">{{item["ItemName"]}}</h5>
-                      <p class="card-text">{{item["Detail"]}}</p>
+                      <h5 class="card-title">{{item[5]}}</h5>
+                      <p class="card-text">{{item[8]}}</p>
                       <small class="text-body-secondary">Rating
                         {{item[9]}}
                         {% for n in range(item[9]) %}
@@ -188,13 +184,13 @@
                       </small><br>
                       <div class="my-2">
                         <span>Item Count: </span>
-                        <form action="update_cart/{{item[0]}}", method="post">
+                        <form action="payment/update_cart/{{item[0]}}", method="post">
                           <input type="number" id="" name="quantity" min="1" max="5" value="{{item[12]}}">
                           <button type="submit" class="btn btn-link" name="update">Update</button>
-                          <button type="submit" class="btn btn-link" name="delete" formaction="delete_cart/{{item[0]}}">Delete</button>
+                          <button type="submit" class="btn btn-link" name="delete" formaction="payment/delete_cart/{{item[0]}}">Delete</button>
                         </form>
                       </div>
-                      <p class="card-text my-2">NZD {{item["Price"]}}</p>
+                      <p class="card-text my-2">NZD {{item[7]}}</p>
                     </div>
                   </div>
                 </div>

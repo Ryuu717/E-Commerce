@@ -1,11 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////////
 // Carousel
 ////////////////////////////////////////////////////////////////////////////////////
-// const multipleItemCarousel = document.querySelector('#carousel-top-categories'); 
-// const carousel = new bootstrap.Carousel(multipleItemCarousel, {
-//     interval: false
-// })
-
 var scrollPosition = 0; 
 
 
@@ -29,21 +24,21 @@ $('.carousel-control-related-items-prev').on('click', function(){
 }); 
 
 
-// Customers Search
-var carouselWidthCustomersSearch = $('.carousel-inner-customers-search')[0].scrollWidth;
-var cardWidthCustomersSearch = $('.carousel-item-customers-search').width();
+// For You
+var carouselWidthCustomersSearch = $('.carousel-inner-customers-search')[0].scrollWidth; 
+var cardWidthCustomersSearch = $('.carousel-item-customers-search').width(); 
 
 $('.carousel-control-customers-search-next').on('click', function(){
-    if(scrollPosition < (carouselWidthCustomersSearch - (cardWidthCustomersSearch * 4))){
-        console.log('next');
-        scrollPosition = scrollPosition + cardWidthCustomersSearch;
-        $('.carousel-inner-customers-search').animate({scrollLeft: scrollPosition},600);
-    }
-});
+    if(scrollPosition < (carouselWidthCustomersSearch - (cardWidthCustomersSearch * 4))){ 
+        console.log('next'); 
+        scrollPosition = scrollPosition + cardWidthCustomersSearch; 
+        $('.carousel-inner-customers-search').animate({scrollLeft: scrollPosition},600); 
+    } 
+}); 
 $('.carousel-control-customers-search-prev').on('click', function(){
-    if(scrollPosition > 0){
-        console.log('prev');
-        scrollPosition = scrollPosition - cardWidthCustomersSearch;
-        $('.carousel-inner-customers-search').animate({scrollLeft: scrollPosition},600);
-    }
+    if(scrollPosition > 0){ 
+        console.log('prev'); 
+        scrollPosition = scrollPosition - cardWidthCustomersSearch; 
+        $('.carousel-inner-customers-search').animate({scrollLeft: scrollPosition},600); 
+    } 
 }); 

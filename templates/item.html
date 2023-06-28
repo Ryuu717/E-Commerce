@@ -5,135 +5,231 @@
   <!-- Navbar -->
   {% include "nav.html" %}
 
-    
-    <!--Items-->
-    <div class="container text-center mt-10">
+  <!-- Alert -->
+  <div class="pt-5 mt-5">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %} 
+        {% for message in messages %} 
+            <div class="alert alert-danger mb-0 mt-2 z-index-10" role="alert">
+              {{ message }}
+            </div> 
+        {% endfor %} 
+    {% endif %} 
+    {% endwith %}
+  </div>
+
+  
+    <div class="container text-center mt-5">
       <div class="row align-items-start">
+
         <!--Sidebar-->
         <div class="col-4">
           <ul class="list-group text-start">
-          <li class="list-group-item">
+            <li class="list-group-item">
 
             {% if data_source == "items" %}
-            <ul class="list-unstyled m-2">
-              <div class="d-flex justify-content-between">
-                <h6 class="m-0">Review:</h6>
-                <li class="text-end">
-                  <a href="/show_item/{{item_list[0][2]}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+              <ul class="list-unstyled m-2">
+                <div class="d-flex justify-content-between">
+                  <h6 class="m-0">Review:</h6>
+                  <li class="text-end">
+                    <a href="/item/{{item_list[0][2]}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+                  </li>
+                </div>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
                 </li>
-              </div>
-              <li class="mx-3">
-                <!-- <a href="/show_item/{{item_list[0][2]}}/rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a> -->
-                <a href="/show_item/{{item_list[0][2]}}_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
-              </li>
-            </ul>
-            <ul class="list-unstyled  m-3">
-              <h6>Prices</h6>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
-              </li>
-            </ul>
-            <ul class="list-unstyled  m-3">
-              <h6>Others</h6>
-              <li class="">-</li>
-              <li class="">-</li>
-              <li class="">-</li>
-            </ul>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Prices</h6>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/{{item_list[0][2]}}_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Others</h6>
+                <li class="">-</li>
+                <li class="">-</li>
+                <li class="">-</li>
+              </ul>
+
+            {% elif data_source == "recently_viewed" %}
+              <ul class="list-unstyled m-2">
+                <div class="d-flex justify-content-between">
+                  <h6 class="m-0">Review:</h6>
+                  <li class="text-end">
+                    <a href="/item/recently_viewed" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+                  </li>
+                </div>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Prices</h6>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/recently_viewed_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Others</h6>
+                <li class="">-</li>
+                <li class="">-</li>
+                <li class="">-</li>
+              </ul>
+
+            {% elif data_source == "popular_now" %}
+              <ul class="list-unstyled m-2">
+                <div class="d-flex justify-content-between">
+                  <h6 class="m-0">Review:</h6>
+                  <li class="text-end">
+                    <a href="/item/popular_now" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+                  </li>
+                </div>
+                <li class="mx-3">
+                  <a href="/item/popular_now_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/popular_now_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/popular_now_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/popular_now_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/popular_now_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Prices</h6>
+                <li class="mx-3">
+                  <a href="/item/popular_now_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/popular_now_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Others</h6>
+                <li class="">-</li>
+                <li class="">-</li>
+                <li class="">-</li>
+              </ul>
+
             {% else %}
-            <ul class="list-unstyled m-2">
-              <div class="d-flex justify-content-between">
-                <h6 class="m-0">Review:</h6>
-                <li class="text-end">
-                  <!-- <a href="/show_item/{{item_list[0][2]}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a> -->
-                  <a href="/show_item/recently_viewed_{{current_user_id}}" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+              <ul class="list-unstyled m-2">
+                <div class="d-flex justify-content-between">
+                  <h6 class="m-0">Review:</h6>
+                  <li class="text-end">
+                    <a href="/item/buy_again" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover text-primary">Reset</a>
+                  </li>
+                </div>
+                <li class="mx-3">
+                  <a href="/item/buy_again_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
                 </li>
-              </div>
-              <li class="mx-3">
-                <!-- <a href="/show_item/{{item_list[0][2]}}/rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a> -->
-                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=5" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️⭐️   5 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/recently_viewed_{{current_user_id}}_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
-              </li>
-            </ul>
-            <ul class="list-unstyled  m-3">
-              <h6>Prices</h6>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
-              </li>
-              <li class="mx-3">
-                <a href="/show_item/{{item_list[0][2]}}_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
-              </li>
-            </ul>
-            <ul class="list-unstyled  m-3">
-              <h6>Others</h6>
-              <li class="">-</li>
-              <li class="">-</li>
-              <li class="">-</li>
-            </ul>
+                <li class="mx-3">
+                  <a href="/item/buy_again_rating=4" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️⭐️   4 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/buy_again_rating=3" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️⭐️   3 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/buy_again_rating=2" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️⭐️   2 Star</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/buy_again_rating=1" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">⭐️   1 Star</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Prices</h6>
+                <li class="mx-3">
+                  <a href="/item/buy_again_price=ASC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Low to High</a>
+                </li>
+                <li class="mx-3">
+                  <a href="/item/buy_again_price=DESC" class="link-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">High to Low</a>
+                </li>
+              </ul>
+              <ul class="list-unstyled  m-3">
+                <h6>Others</h6>
+                <li class="">-</li>
+                <li class="">-</li>
+                <li class="">-</li>
+              </ul>
             {% endif %}
-          </li>
-        </ul>
-      </div>
+            </li>
+          </ul>
+        </div>
         
         <!--Items-->
         <div class="col-8">
           {% if data_source == "items" %}
-            {% for item in item_list %}
-              <div class="card mb-3 text-start" style="max-width: 700px;">
-                <div class="row g-0">
-                  <div class="col-md-4 p-2">
-                    <!-- <a href="/show_items/{{item['Category']}}"> -->
-                    <a href="/show_items/{{item['ItemID']}}">
-                      <img src="{{item['ImageURL']}}" class="img-fluid rounded-start img-lg" alt="...">
-                    </a>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">{{item['ItemName']}}</h5>
-                      <p class="card-text">{{item['Detail']}}</p>
-                      <small class="text-body-secondary">Rating
-                        {{item['Rating']}}
-                        {% for n in range(item['Rating']) %}
-                        <i class="fa-solid fa-star" style="color: #ffd500;"></i>
-                        {% endfor%}
-                      </small>
-                      <p class="card-text my-3">NZD {{item['Price']}}</p>
+            {% if item_list == None %}
+              <p></p>
+
+            {% else %}
+              {% for item in item_list %}
+                <div class="card mb-3 text-start" style="max-width: 700px;">
+                  <div class="row g-0">
+                    <div class="col-md-4 p-2">
+                      <a href="/items/{{item[0]}}">
+                        <img src="{{item[7]}}" class="img-fluid rounded-start img-lg" alt="...">
+                      </a>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{item[1]}}</h5>
+                        <p class="card-text">{{item[4]}}</p>
+                        <small class="text-body-secondary">Rating
+                          {{item[5]}}
+                          {% for n in range(item[5]) %}
+                          <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                          {% endfor%}
+                        </small>
+                        <p class="card-text my-3">NZD {{item[3]}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            {% endfor %}
-          {% else %}
+              {% endfor %}
+            {% endif %}
+
+          {% elif data_source == "recently_viewed" %}
             {% for item in item_list %}
                 <div class="card mb-3 text-start" style="max-width: 700px;">
                   <div class="row g-0">
                     <div class="col-md-4 p-2">
-                      <a href="/show_items/{{item[4]}}">
+                      <a href="/items/{{item[4]}}">
                         <img src="{{item[11]}}" class="img-fluid rounded-start img-lg" alt="...">
                       </a>
                     </div>
@@ -147,7 +243,59 @@
                           <i class="fa-solid fa-star" style="color: #ffd500;"></i>
                           {% endfor%}
                         </small>
-                        <p class="card-text my-3">NZD {{item[3]}}</p>
+                        <p class="card-text my-3">NZD {{item[7]}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}  
+
+          {% elif data_source == "popular_now" %}
+            {% for item in item_list %}
+                <div class="card mb-3 text-start" style="max-width: 700px;">
+                  <div class="row g-0">
+                    <div class="col-md-4 p-2">
+                      <a href="/items/{{item[4]}}">
+                        <img src="{{item[11]}}" class="img-fluid rounded-start img-lg" alt="...">
+                      </a>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{item[5]}}</h5>
+                        <p class="card-text">{{item[8]}}</p>
+                        <small class="text-body-secondary">Rating
+                          {{item[9]}}
+                          {% for n in range(item[9]) %}
+                          <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                          {% endfor%}
+                        </small>
+                        <p class="card-text my-3">NZD {{item[7]}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+
+          {% else %}
+            {% for item in item_list %}
+                <div class="card mb-3 text-start" style="max-width: 700px;">
+                  <div class="row g-0">
+                    <div class="col-md-4 p-2">
+                      <a href="/items/{{item[4]}}">
+                        <img src="{{item[11]}}" class="img-fluid rounded-start img-lg" alt="...">
+                      </a>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{item[5]}}</h5>
+                        <p class="card-text">{{item[8]}}</p>
+                        <small class="text-body-secondary">Rating
+                          {{item[9]}}
+                          {% for n in range(item[9]) %}
+                          <i class="fa-solid fa-star" style="color: #ffd500;"></i>
+                          {% endfor%}
+                        </small>
+                        <p class="card-text my-3">NZD {{item[7]}}</p>
                       </div>
                     </div>
                   </div>
@@ -155,8 +303,6 @@
             {% endfor %}
           {% endif %}
         </div>
-
-
       </div>
     </div>
 

@@ -5,17 +5,6 @@
   <!-- Navbar -->
   {% include "nav.html" %}
 
-  <!-- {% for row in rows %} 
-        <tr> 
-            <td><h3>{{row["FirstName"]}}</h3></td> 
-            <td><h3>{{row["LastName"]}}</h3></td>
-            <td><h3>{{row["Address"]}}</h3></td>
-            <td><h3>{{row["City"]}}</h3></td>
-            <td><a href="/GetStudentByID/{{row[0]}}">Edit</a></td>
-            <td><a href="/delete/{{row[0]}}">Delete</a></td>
-        </tr> 
-        {% endfor %}  -->
-
   <!--Account-->
   <!-- Modal -->
   <div class="modal fade pt-5 mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -33,7 +22,7 @@
               <div class="form-row">
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.first_name.label }} <br> 
-                  {{ registered_form.first_name(value=account_list[0]["FirstName"])}} <br> 
+                  {{ registered_form.first_name(value=account_list[0][1])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.first_name.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -42,7 +31,7 @@
         
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.last_name.label }} <br> 
-                  {{ registered_form.last_name(value=account_list[0]["LastName"])}} <br> 
+                  {{ registered_form.last_name(value=account_list[0][2])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.last_name.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -51,7 +40,7 @@
     
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.address.label }} <br> 
-                  {{ registered_form.address(value=account_list[0]["Address"])}} <br> 
+                  {{ registered_form.address(value=account_list[0][3])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.address.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -60,7 +49,7 @@
         
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.phone.label }} <br> 
-                  {{ registered_form.phone(value=account_list[0]["Phone"])}} <br> 
+                  {{ registered_form.phone(value=account_list[0][4])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.phone.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -69,7 +58,7 @@
         
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.email.label }} <br> 
-                  {{ registered_form.email(value=account_list[0]["Email"])}} <br> 
+                  {{ registered_form.email(value=account_list[0][5])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.email.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -78,7 +67,7 @@
     
                 <div class="form-group col-md-10 mb-2">
                   {{ registered_form.card_number.label }} <br> 
-                  {{ registered_form.card_number(value=account_list[0]["CardNumber"])}} <br> 
+                  {{ registered_form.card_number(value=account_list[0][6])}} <br> 
                   <!-- Error Message -->
                   {% for message in registered_form.card_number.errors %} 
                     <div class="text-danger">{{message}}</div> 
@@ -98,7 +87,7 @@
     </div>
   </div>
 
-  <div class="container-sm mx-5 mt-10">
+  <div class="container-sm mt-10">
     <h1 class="my-4">Your Account
       <span><a href="" class="text-primary h4 p-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a></span>
     </h1>
@@ -111,52 +100,57 @@
           <tbody>
             <tr>
               <th scope="row">Name:</th>
-              <td>{{account_list[0]["FirstName"]}} {{account_list[0]["LastName"]}}</td>
+              <td>{{account_list[0][1]}} {{account_list[0][2]}}</td>
             </tr>
             <tr>
               <th scope="row">Address:</th>
-              <td>{{account_list[0]["Address"]}}</td>
+              <td>{{account_list[0][3]}}</td>
             </tr>
             <tr>
               <th scope="row">Phone:</th>
-              <td>{{account_list[0]["Phone"]}}</td>
+              <td>{{account_list[0][4]}}</td>
             </tr>
           </tbody>
         </table>
       </li>
       
-      
+      <!--Payment Method-->
       <li class="my-5">
         <h4>2. Payment Method</h3>
         <table class="table table-borderless" style="width: auto;">
           <tbody>
             <tr>
-              <th scope="row">Card 1:</th>
-              <td>Visa : {{account_list[0]["CardNumber"]}}   <span class="mx-2 text-danger">(Need to show only last 4 digits)</span></td>
+              <th scope="row">Credit Card :</th>
+              <td>Visa : **** - **** - {{card_num}}</td>
             </tr>
-            <!-- <tr>
-              <th scope="row">Card 2:</th>
-              <td>Visa : {{account_list[0]["CardNumber"]}}</td>
-            </tr> -->
           </tbody>
         </table>
       </li>
       
       <!--Order history-->
-      <li class="my-5">
+      <li class="">
         <h4>3. Order history</h3>
         <div class="row mx-1 mb-3">
           <div id="carousel-order-history" class="carousel">
             <div class="carousel-inner-order-history">
-              {% for item in order_list%}
-              <div class="carousel-item-order-history">
-                <div class="image-wrapper">
-                  <img src="{{item[11]}}" alt="..." class="img-sm">
+              {% if order_list %}
+                {% for item in order_list%}
+                <div class="carousel-item-order-history">
+                  <div class="image-wrapper">
+                    <a href="/items/{{item[4]}}">
+                      <img src="{{item[11]}}" alt="..." class="img-sm">
+                    </a>
+                  </div>
+                  <div class="text-center">
+                    <p class="d-inline-block text-truncate" style="max-width: 120px;">
+                      {{item[5]}}
+                    </p>
+                  </div>
                 </div>
-                <p class="text-center">{{item[5]}}</p>
-              </div>
-              {% endfor %}
-
+                {% endfor %}
+              {% else %}
+                <div class="m-5"></div>
+              {% endif %}
             </div>
             <button class="carousel-control-order-history-prev" type="button" data-bs-target="#carousel-order-history" data-bs-slide="prev">
               <span class="carousel-control-order-history-prev-icon" aria-hidden="true"></span>
@@ -169,6 +163,7 @@
           </div>
         </div>
       </li>
+
       <!--Wish list-->
       <li class="mt-4">
         <h4>4. Wish list</h3>
@@ -206,7 +201,6 @@
           </div>
         </div>
       </li>
-
     </ul>
   </div>
 

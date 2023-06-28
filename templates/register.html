@@ -2,26 +2,25 @@
 {% include "header.html" %}
 
 <!-- Body -->
-<body class="py-0 m-0 border-0 bd-example">
-  <div class="d-flex justify-content-center mt-5 text-danger pt-5 mt-5">
-      {% with messages = get_flashed_messages() %}
-          {% if messages %} 
-              <ul class='mesage'> 
-                  {% for message in messages %} 
-                      <li>{{ message }}</li> 
-                  {% endfor %} 
-              </ul> 
-          {% endif %} 
-      {% endwith %}
-  </div>
+<body class="py-0 px-0 m-0 border-0 bd-example">
+  
+  <!-- Alert -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %} 
+        {% for message in messages %} 
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div> 
+        {% endfor %} 
+    {% endif %} 
+  {% endwith %}
   
     
   <!--Registration Form-->
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center mt-5">
     <!-- WTForms -->
     <form class="card p-4" action="/add_account", method="post" style="width: 30rem;">
       {{ form.hidden_tag() }} 
-
       <h2 class="text-start">Create account</h2>
       <div class="form-row">
         <div class="form-group col-md-10 mb-2">
@@ -77,31 +76,9 @@
             <div class="text-danger">{{message}}</div> 
           {% endfor %} 
 
-          <!-- {{ form.submit }}  -->
         </div>
       </div>
       <input type="submit" name="Go Back to home" class="btn btn-success col-md-12 my-3"/>
-
-      <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Modal</button> -->
-      <!-- Modal -->
-      <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Account successfully added
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-              <input type="submit" name="Go Back to home" class="btn btn-success col-md-12" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
       <hr class="my-5">
       <p>Already have an account?<span class="px-2"><a href="/signin">Sign in</a></span></p>

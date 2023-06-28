@@ -6,32 +6,31 @@
 
   <!-- Alert -->
   {% with messages = get_flashed_messages() %}
-  {% if messages %} 
-      {% for message in messages %} 
-          <div class="alert alert-danger" role="alert">
-            {{ message }}
-          </div> 
-      {% endfor %} 
-  {% endif %} 
+    {% if messages %} 
+        {% for message in messages %} 
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div> 
+        {% endfor %} 
+    {% endif %} 
   {% endwith %}
 
   <!--Registration Form-->
   <div class="d-flex justify-content-center pt-5 mt-5">
-    <form class="card p-4" action="/signin_user", method="post">
+    <form class="card p-4" action="/signin_account", method="post">
       <h2 class="text-center">Sign in</h2>
       <div class="form-row">
         <div class="form-group col-md-6 mb-2">
           <label for="inputEmail">Email</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email">
+          <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="Email" required>
           <label for="inputPassword">Password</label>
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="Password" required>
         </div>
       </div>
       <button type="submit" class="btn btn-success col-md-12 my-3">Continue</button>
-      <a href="#" class="text-end my-3"><small>Forgot password?</small></a>
     </form>
   </div>
-  <div class="d-flex justify-content-center my-4">
+  <div class="d-flex justify-content-center my-5">
     <p class="text-secondary"><span>─────────────── </span>New to here?<span> ─────────────── </span></p>
   </div>
 
@@ -39,11 +38,11 @@
     <button class="btn btn-secondary mb-2" type="button">
       <a href="/register" class="text-decoration-none text-white">Create your account</a>
     </button>
-    <button class="btn btn-light btn-outline-secondary" type="button">
+    <button class="btn btn-light border border-secondary" type="button">
       <a href="/register_guest" class="text-decoration-none text-black">Continue as a guest</a>
     </button>
   </div>
-
+  
 
   
 </body>
