@@ -11,8 +11,8 @@
 # Sample Account Information (for sign-in)
     - First Name:	John
     - Last Name:	Wick
-    - Email:		john@gmail.com
-    - Password:	    daisy08
+    - Email:	john@gmail.com
+    - Password:	   daisy08
 
 
 # Session time:	
