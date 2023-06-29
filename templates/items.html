@@ -24,7 +24,7 @@
                 <i class="fa-solid fa-star" style="color: #ffd500;"></i>
                 {% endfor%}
               </li>
-              <li class="py-1">$ {{item_detail[0][4]}}</li>
+              <li class="py-1">$ {{item_detail[0][3]}}</li>
             </ul>            
           </div>
           <br>
@@ -57,9 +57,6 @@
               <a class="d-grid gap-2 p-2" href="/signin">
                 <button type="button" class="btn btn-success">Order</button>
               </a>
-              <!-- <a class="d-grid gap-2 p-2" href="/payment/guest">
-                <button type="button" class="btn btn-secondary">Order as Guest</button>
-              </a> -->
               <p><small>(Please enter your information before your order)</small></p>
             {% else %}
               <form action="/add_cart/{{item_detail[0][0]}}", method="post">
